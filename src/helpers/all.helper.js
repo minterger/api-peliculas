@@ -58,6 +58,7 @@ async function getInfo(uri) {
     object.descripcion = $('.text-large').html().replace(/^\W/g, '');
     object.ano = $('.font-size-18.text-info.text-semibold').html().trim();
     object.data = [];
+    object.generos = [];
     $('.sectionDetail.mb15').each((i, el) => {
       const $el = cheerio.load($(el).html());
       const data = {};
@@ -76,8 +77,18 @@ async function getInfo(uri) {
         data.content = $(el).text().match(/\d+\W\w+?\W\d+/g);
       }
       object.data.push(data);
-    })
-    return {object, $};
+    });
+    $('.container-fluid .card .card-body .p-v-20').eq(1).find('a').each((i , el) =>{
+      const $el = $(el);
+      const genero = { 
+        name: $el.find('span').text(),
+        href: $el.attr('href'),
+        title: $el.attr('title')
+      }
+      object.generos.push(genero);
+    });
+  
+    return object;
   } catch (error) {
     console.error(error);
     return error;
