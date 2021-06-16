@@ -3,8 +3,10 @@ const router = Router();
 
 const {
   search,
+  generos,
   getGeneros,
-  generos
+  getGenerosPeliculas,
+  getGenerosSeries
 } = require('../controllers/main.controller')
 
 router.get('/search', search);
@@ -12,5 +14,9 @@ router.get('/search', search);
 router.get('/generos', generos);
 
 router.get('/generos/:genero', getGeneros);
+
+router.get('/generos/:genero/peliculas', getGenerosPeliculas);
+
+router.get('/generos/:genero/series', getGenerosSeries);
 
 module.exports = router;

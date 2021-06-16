@@ -38,3 +38,5 @@ npm start
   - /search?s='busqueda'
   - /generos
   - /generos/:genero
+  - /generos/:genero/peliculas
+  - /generos/:genero/series

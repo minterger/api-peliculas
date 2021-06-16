@@ -1,7 +1,7 @@
 const {
-    getPosters,
-    getInfo,
-    reqRepro
+  getPosters,
+  getInfo,
+  reqRepro
 } = require('../helpers/all.helper');
 const mainCtrl = {};
 

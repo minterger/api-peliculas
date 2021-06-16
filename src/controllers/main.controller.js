@@ -25,7 +25,7 @@ mainCtrl.generos = async (req, res) => {
 }
 
 mainCtrl.getGeneros = async (req, res) => {
-  const page = req.query.page ? `&page=${req.query.page}` : '';
+  const page = req.query.page ? `?page=${req.query.page}` : '';
   const data = await searchPoster(`generos/${req.params.genero}${page}`);
   if (parseInt(data) === 404) {
     res.send('404', 'Not Found')
@@ -33,5 +33,26 @@ mainCtrl.getGeneros = async (req, res) => {
     res.json(data);
   }
 }
+
+mainCtrl.getGenerosPeliculas = async (req, res) => {
+  const page = req.query.page ? `?page=${req.query.page}` : '';
+  const data = await searchPoster(`generos/${req.params.genero}/peliculas${page}`);
+  if (parseInt(data) === 404) {
+    res.send('404', 'Not Found')
+  } else {
+    res.json(data);
+  }
+}
+
+mainCtrl.getGenerosSeries = async (req, res) => {
+  const page = req.query.page ? `?page=${req.query.page}` : '';
+  const data = await searchPoster(`generos/${req.params.genero}/series${page}`);
+  if (parseInt(data) === 404) {
+    res.send('404', 'Not Found')
+  } else {
+    res.json(data);
+  }
+}
+
 
 module.exports = mainCtrl;
