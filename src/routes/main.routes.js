@@ -7,7 +7,7 @@ const {
   getGeneros,
   getGenerosPeliculas,
   getGenerosSeries
-} = require('../controllers/main.controller')
+} = require('../controllers/more.controller')
 
 router.get('/search', search);
 

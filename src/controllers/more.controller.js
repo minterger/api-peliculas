@@ -2,7 +2,7 @@ const mainCtrl = {};
 const {
   searchPoster,
   reqGenders
-} = require('../helpers/main.helper');
+} = require('../helpers/more.helper');
 
 mainCtrl.search = async (req, res) => {
   const page = req.query.page ? `&page=${req.query.page}` : '';
