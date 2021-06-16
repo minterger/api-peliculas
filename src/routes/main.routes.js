@@ -9,8 +9,8 @@ const {
 
 router.get('/search', search);
 
-router.get('/generos/:genero', getGeneros);
-
 router.get('/generos', generos);
+
+router.get('/generos/:genero', getGeneros);
 
 module.exports = router;

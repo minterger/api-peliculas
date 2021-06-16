@@ -36,5 +36,5 @@ npm start
 - Mas
   
   - /search?s='busqueda'
-  - /generos/:genero
   - /generos
+  - /generos/:genero

@@ -14,9 +14,9 @@ mainCtrl.search = async (req, res) => {
   }
 }
 
-mainCtrl.getGeneros = async (req, res) => {
-  const page = req.query.page ? `&page=${req.query.page}` : '';
-  const data = await searchPoster(`generos/${req.params.genero}${page}`);
+mainCtrl.generos = async (req, res) => {
+  const data = await reqGenders('');
+  res.status(200)
   if (parseInt(data) === 404) {
     res.send('404', 'Not Found')
   } else {
@@ -24,9 +24,9 @@ mainCtrl.getGeneros = async (req, res) => {
   }
 }
 
-mainCtrl.generos = async (req, res) => {
-  const data = await reqGenders('');
-  res.status(200)
+mainCtrl.getGeneros = async (req, res) => {
+  const page = req.query.page ? `&page=${req.query.page}` : '';
+  const data = await searchPoster(`generos/${req.params.genero}${page}`);
   if (parseInt(data) === 404) {
     res.send('404', 'Not Found')
   } else {
