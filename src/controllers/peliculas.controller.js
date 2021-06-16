@@ -5,9 +5,29 @@ const {
 } = require('../helpers/all.helper');
 const mainCtrl = {};
 
-mainCtrl.renderpeliculas = async (req, res) => {
+mainCtrl.renderPeliculas = async (req, res) => {
   const page = req.query.page ? `?page=${req.query.page}` : '';
   const data = await getPosters(`peliculas${page}`);
+  if (parseInt(data) === 404) {
+    res.send('404', 'Not Found')
+  } else {
+    res.json(data);
+  }
+}
+
+mainCtrl.peliculasEstrenos = async (req, res) => {
+  const page = req.query.page ? `?page=${req.query.page}` : '';
+  const data = await getPosters(`peliculas/estrenos${page}`);
+  if (parseInt(data) === 404) {
+    res.send('404', 'Not Found')
+  } else {
+    res.json(data);
+  }
+}
+
+mainCtrl.peliculasPopulares = async (req, res) => {
+  const page = req.query.page ? `?page=${req.query.page}` : '';
+  const data = await getPosters(`peliculas/populares${page}`);
   if (parseInt(data) === 404) {
     res.send('404', 'Not Found')
   } else {

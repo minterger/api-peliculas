@@ -16,6 +16,26 @@ mainCtrl.renderSeries = async (req, res) => {
   }
 }
 
+mainCtrl.seriesEstrenos = async (req, res) => {
+  const page = req.query.page ? `?page=${req.query.page}` : '';
+  const data = await getPosters(`series/estrenos${page}`);
+  if (parseInt(data) === 404) {
+    res.send('404', 'Not Found')
+  } else {
+    res.json(data);
+  }
+}
+
+mainCtrl.seriesPopulares = async (req, res) => {
+  const page = req.query.page ? `?page=${req.query.page}` : '';
+  const data = await getPosters(`series/populares${page}`);
+  if (parseInt(data) === 404) {
+    res.send('404', 'Not Found')
+  } else {
+    res.json(data);
+  }
+}
+
 mainCtrl.getInfoSerie = async (req, res) => {
   const data = await getInfo(`serie/${req.params.serie}`);
   if (parseInt(data) === 404) {

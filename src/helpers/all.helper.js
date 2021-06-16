@@ -2,9 +2,9 @@ const cheerio = require('cheerio');
 const axios = require('axios');
 
 async function fetchurl(param) {
-  let url = param == null ? "" : param;
+  let uri = param == null ? "" : param;
   try {
-      const res = await axios.get(`https://pelisplushd.net/${url}`);
+      const res = await axios.get(`https://pelisplushd.net/${uri}`);
       return res.data;
   } catch (error) {
       console.error(error.data);

@@ -24,9 +24,13 @@ npm run dev
 
 ## Peticiones
 
+Para moverse por las paginas usa ?page='num' 
+
 - Series
 
   - /series
+  - /series/estrenos
+  - /series/populares
   - /serie/:serie
   - /serie/seasons/:serie
   - /serie/rep/:serie/season/:temp/chapter/:cap
@@ -34,6 +38,8 @@ npm run dev
 - Peliculas
 
   - /peliculas
+  - /peliculas/estrenos
+  - /peliculas/populares
   - /pelicula/:pelicula
   - /pelicula/rep/:pelicula
 

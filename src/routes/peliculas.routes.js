@@ -2,13 +2,19 @@ const { Router } = require('express');
 const router = Router();
 
 const {
-    renderpeliculas,
+    renderPeliculas,
+    peliculasEstrenos,
+    peliculasPopulares,
     getInfoPelicula,
     repPeliculas,
 } = require('../controllers/peliculas.controller');
 
 
-router.get('/peliculas', renderpeliculas);
+router.get('/peliculas', renderPeliculas);
+
+router.get('/peliculas/estrenos', peliculasEstrenos);
+
+router.get('/peliculas/populares', peliculasPopulares);
 
 router.get('/pelicula/:pelicula', getInfoPelicula);
 
