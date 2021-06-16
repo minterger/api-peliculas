@@ -1,6 +1,7 @@
 const mainCtrl = {};
 const {
-  searchPoster
+  searchPoster,
+  reqGenders
 } = require('../helpers/main.helper');
 
 mainCtrl.search = async (req, res) => {
@@ -24,7 +25,13 @@ mainCtrl.getGeneros = async (req, res) => {
 }
 
 mainCtrl.generos = async (req, res) => {
-  
+  const data = await reqGenders('');
+  res.status(200)
+  if (parseInt(data) === 404) {
+    res.send('404', 'Not Found')
+  } else {
+    res.json(data);
+  }
 }
 
 module.exports = mainCtrl;

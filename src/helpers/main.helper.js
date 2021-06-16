@@ -51,6 +51,32 @@ async function searchPoster (uri) {
   }
 }
 
+async function reqGenders(uri) {
+  try {
+    const html = await fetchurl(uri);
+    if (parseInt(html) === 404) {
+      return 404;
+    }
+    const $ = cheerio.load(html);
+     
+    const array = []
+    $('.nav-item .dropdown-menu').eq(3).find('a').each((i, el) => {
+      const $el = $(el);
+      const object = {
+        name: $el.text(),
+        href: $el.attr('href')
+      };
+      array.push(object);
+    });
+
+    return array;
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+}
+
 module.exports = {
-  searchPoster
+  searchPoster,
+  reqGenders
 }
