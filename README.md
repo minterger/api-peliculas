@@ -1,19 +1,23 @@
 # Api-Peliculas
 
 ## Instalar
-
 ```
 npm install
 ```
 
-## Desarrollo
-```
-npm run dev
-```
-
-## Producción
+## Iniciar en Producción
 ```
 npm start
+```
+
+## Instalar dependecias de desarrollo
+```
+npm install -D
+```
+
+## Iniciar en Desarrollo
+```
+npm run dev
 ```
 
 ---
@@ -33,9 +37,12 @@ npm start
   - /pelicula/:pelicula
   - /pelicula/rep/:pelicula
 
-- Mas
-  
+- Buscador
+
   - /search?s='busqueda'
+
+- Generos
+
   - /generos
   - /generos/:genero
   - /generos/:genero/peliculas
