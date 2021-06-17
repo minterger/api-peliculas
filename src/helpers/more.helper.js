@@ -44,7 +44,21 @@ async function searchPoster (uri) {
       return data.type !== ' Anime\n'; 
     });
 
-    return array;
+    const page = parseInt($('.page-item.active .page-link').text());
+    const lastPage = parseInt($('.page-item .page-link').eq(-2).text());
+
+    const pagination =  {
+      page,
+      nextPage: page === lastPage ? null : page + 1,
+      prevPage: page == 1 ? null : page - 1,
+      lastPage,
+    };
+
+    return {
+      posters: array,
+      pagination
+    };
+
   } catch (error) {
     console.error(error);
     return error;
