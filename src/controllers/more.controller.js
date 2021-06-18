@@ -7,19 +7,20 @@ const {
 mainCtrl.search = async (req, res) => {
   const page = req.query.page ? `&page=${req.query.page}` : '';
   const data = await searchPoster(`search?s=${req.query.s}${page}`);
-  if (parseInt(data) === 404) {
-    res.send('404', 'Not Found')
+  if (data.status) {
+    res.status(data.status).send(data.statusText);
   } else {
+    res.status(200);
     res.json(data);
   }
 }
 
 mainCtrl.generos = async (req, res) => {
   const data = await reqGenders('');
-  res.status(200)
-  if (parseInt(data) === 404) {
-    res.send('404', 'Not Found')
+  if (data.status) {
+    res.status(data.status).send(data.statusText);
   } else {
+    res.status(200);
     res.json(data);
   }
 }
@@ -27,9 +28,10 @@ mainCtrl.generos = async (req, res) => {
 mainCtrl.getGeneros = async (req, res) => {
   const page = req.query.page ? `?page=${req.query.page}` : '';
   const data = await searchPoster(`generos/${req.params.genero}${page}`);
-  if (parseInt(data) === 404) {
-    res.send('404', 'Not Found')
+  if (data.status) {
+    res.status(data.status).send(data.statusText);
   } else {
+    res.status(200);
     res.json(data);
   }
 }
@@ -37,9 +39,10 @@ mainCtrl.getGeneros = async (req, res) => {
 mainCtrl.getGenerosPeliculas = async (req, res) => {
   const page = req.query.page ? `?page=${req.query.page}` : '';
   const data = await searchPoster(`generos/${req.params.genero}/peliculas${page}`);
-  if (parseInt(data) === 404) {
-    res.send('404', 'Not Found')
+  if (data.status) {
+    res.status(data.status).send(data.statusText);
   } else {
+    res.status(200);
     res.json(data);
   }
 }
@@ -47,9 +50,10 @@ mainCtrl.getGenerosPeliculas = async (req, res) => {
 mainCtrl.getGenerosSeries = async (req, res) => {
   const page = req.query.page ? `?page=${req.query.page}` : '';
   const data = await searchPoster(`generos/${req.params.genero}/series${page}`);
-  if (parseInt(data) === 404) {
-    res.send('404', 'Not Found')
+  if (data.status) {
+    res.status(data.status).send(data.statusText);
   } else {
+    res.status(200);
     res.json(data);
   }
 }

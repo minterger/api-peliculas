@@ -4,21 +4,24 @@ const axios = require('axios');
 async function fetchurl(param) {
   let uri = param == null ? "" : param;
   try {
-      const res = await axios.get(`https://pelisplushd.net/${uri}`);
-      return res.data;
+    const res = await axios.get(`https://pelisplushd.net/${uri}`);
+    return res;
   } catch (error) {
-      console.error(error.data);
-      return error.response.status;
+    console.error(`Error: ${error.response.status} ${error.response.statusText}`);
+    return error.response;
   }
 }
 
 async function getPosters (uri) {
   try {
     const html = await fetchurl(uri);
-    if (parseInt(html) === 404) {
-      return 404
+    if (html.status !== 200) {
+      return {
+        status: html.status,
+        statusText: html.statusText
+      }
     }
-    const $ = cheerio.load(html);
+    const $ = cheerio.load(html.data);
       
     const array = [];
       
@@ -63,10 +66,13 @@ async function getPosters (uri) {
 async function getInfo(uri) {
   try {
     const html = await fetchurl(uri);
-    if (parseInt(html) === 404) {
-      return 404
+    if (html.status !== 200) {
+      return {
+        status: html.status,
+        statusText: html.statusText
+      }
     }
-    const $ = cheerio.load(html);
+    const $ = cheerio.load(html.data);
     
     const object = {};
     object.title = $('.m-b-5').html().replace(/^\W/g, '');
@@ -113,10 +119,13 @@ async function getInfo(uri) {
 async function reqSeasons(uri) {
   try {
     const html = await fetchurl(uri);
-    if (parseInt(html) === 404) {
-      return 404
+    if (html.status !== 200) {
+      return {
+        status: html.status,
+        statusText: html.statusText
+      }
     }
-    const $ = cheerio.load(html);
+    const $ = cheerio.load(html.data);
       
     const data = {};
 
@@ -143,11 +152,14 @@ async function reqSeasons(uri) {
 async function reqRepro (uri) {
   try {
     const html = await fetchurl(uri);
-    if (parseInt(html) === 404) {
-      return 404
+    if (html.status !== 200) {
+      return {
+        status: html.status,
+        statusText: html.statusText
+      }
     }
-    const $ = cheerio.load(html);
-    
+    const $ = cheerio.load(html.data);
+      x
     const video = $('.player script').html()
       .match(/(https?:\/\/)[/a-z.0-9A-Z\-?=#%&]+/g);
 

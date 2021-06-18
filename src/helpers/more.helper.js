@@ -4,21 +4,24 @@ const axios = require('axios');
 async function fetchurl(param) {
   let url = param == null ? "" : param;
   try {
-      const res = await axios.get(`https://pelisplushd.net/${url}`);
-      return res.data;
+    const res = await axios.get(`https://pelisplushd.net/${url}`);
+    return res;
   } catch (error) {
-      console.error(error.data);
-      return error.response.status;
+    console.error(`Error: ${error.response.status} ${error.response.statusText}`);
+    return error.response;
   }
 }
 
 async function searchPoster (uri) {
   try {
     const html = await fetchurl(uri);
-    if (parseInt(html) === 404) {
-      return 404
+    if (html.status !== 200) {
+      return {
+        status: html.status,
+        statusText: html.statusText
+      }
     }
-    const $ = cheerio.load(html);
+    const $ = cheerio.load(html.data);
       
     let array = [];
       
@@ -68,11 +71,14 @@ async function searchPoster (uri) {
 async function reqGenders(uri) {
   try {
     const html = await fetchurl(uri);
-    if (parseInt(html) === 404) {
-      return 404;
+    if (html.status !== 200) {
+      return {
+        status: html.status,
+        statusText: html.statusText
+      }
     }
-    const $ = cheerio.load(html);
-     
+    const $ = cheerio.load(html.data);
+      
     const array = []
     $('.nav-item .dropdown-menu').eq(3).find('a').each((i, el) => {
       const $el = $(el);
