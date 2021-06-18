@@ -159,7 +159,6 @@ async function reqRepro (uri) {
       }
     }
     const $ = cheerio.load(html.data);
-      x
     const video = $('.player script').html()
       .match(/(https?:\/\/)[/a-z.0-9A-Z\-?=#%&]+/g);
 
