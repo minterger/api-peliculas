@@ -1,16 +1,5 @@
 const cheerio = require('cheerio');
-const axios = require('axios');
-
-async function fetchurl(param) {
-  let uri = param == null ? "" : param;
-  try {
-    const res = await axios.get(`https://pelisplushd.net/${uri}`);
-    return res;
-  } catch (error) {
-    console.error(`Error: ${error.response.status} ${error.response.statusText}`);
-    return error.response;
-  }
-}
+const fetchurl = require('./url/fetch')
 
 async function getPosters (uri) {
   try {
@@ -30,7 +19,7 @@ async function getPosters (uri) {
         i,
         poster_link: $(el)
           .attr('href')
-          .replace(/\w{5}\W{3}(\w+\W){2}/gi, ''),
+          .replace(/\w{4,5}\W{3}(\w+\.?){1,3}/gi, ''),
         poster: $(el).find('img')
           .removeAttr('class')
           .removeAttr('srcset')
@@ -89,7 +78,7 @@ async function getInfo(uri) {
         $el('a').each((i, el) => {
           const content = {
             title: $(el).attr('title'),
-            href: $(el).attr('href').replace(/\w{5}\W{3}(\w+\W){2}/gi, ''),
+            href: $(el).attr('href').replace(/\w{4,5}\W{3}(\w+\.?){1,3}/gi, ''),
             text: $(el).text()
           };
           data.content.push(content);
@@ -137,7 +126,10 @@ async function reqSeasons(uri) {
       const chapters = [];
       const $el = cheerio.load($(el).html());
       $el('.btn.btn-primary.btn-block').each((i, el) => {
-         chapters.push($(el).text());
+        chapters.push({
+          title: $(el).text(),
+          href: $(el).attr('href').replace(/\w{4,5}\W{3}(\w+\.?){1,3}/gi, '')
+        });
       })
       data.chapters.push(chapters);
     })

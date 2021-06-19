@@ -20,6 +20,6 @@ router.get('/serie/:serie', getInfoSerie);
 
 router.get('/serie/seasons/:serie', reqSeasons);
 
-router.get('/serie/rep/:serie/season/:temp/chapter/:cap', repSeries);
+router.get('/serie/:serie/temporada/:temp/capitulo/:cap', repSeries);
 
 module.exports = router;

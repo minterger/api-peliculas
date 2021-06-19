@@ -7,7 +7,7 @@ const mainCtrl = {};
 
 mainCtrl.renderPeliculas = async (req, res) => {
   const page = req.query.page ? `?page=${req.query.page}` : '';
-  const data = await getPosters(`peliculas${page}`);
+  const data = await getPosters(`/peliculas${page}`);
   if (data.status) {
     res.status(data.status).send(data.statusText);
   } else {
@@ -18,7 +18,7 @@ mainCtrl.renderPeliculas = async (req, res) => {
 
 mainCtrl.peliculasEstrenos = async (req, res) => {
   const page = req.query.page ? `?page=${req.query.page}` : '';
-  const data = await getPosters(`peliculas/estrenos${page}`);
+  const data = await getPosters(`/peliculas/estrenos${page}`);
   if (data.status) {
     res.status(data.status).send(data.statusText);
   } else {
@@ -29,7 +29,7 @@ mainCtrl.peliculasEstrenos = async (req, res) => {
 
 mainCtrl.peliculasPopulares = async (req, res) => {
   const page = req.query.page ? `?page=${req.query.page}` : '';
-  const data = await getPosters(`peliculas/populares${page}`);
+  const data = await getPosters(`/peliculas/populares${page}`);
   if (data.status) {
     res.status(data.status).send(data.statusText);
   } else {
@@ -39,7 +39,7 @@ mainCtrl.peliculasPopulares = async (req, res) => {
 }
 
 mainCtrl.getInfoPelicula = async (req, res) => {
-  const data = await getInfo(`pelicula/${req.params.pelicula}`);
+  const data = await getInfo(`/pelicula/${req.params.pelicula}`);
   if (data.status) {
     res.status(data.status).send(data.statusText);
   } else {
@@ -49,7 +49,7 @@ mainCtrl.getInfoPelicula = async (req, res) => {
 }
 
 mainCtrl.repPeliculas = async (req, res) => {
-  const data = await reqRepro(`pelicula/${req.params.pelicula}`);
+  const data = await reqRepro(`/pelicula/${req.params.pelicula}`);
   if (data.status) {
     res.status(data.status).send(data.statusText);
   } else {

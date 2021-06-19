@@ -6,7 +6,7 @@ const {
 
 mainCtrl.search = async (req, res) => {
   const page = req.query.page ? `&page=${req.query.page}` : '';
-  const data = await searchPoster(`search?s=${req.query.s}${page}`);
+  const data = await searchPoster(`/search?s=${req.query.s}${page}`);
   if (data.status) {
     res.status(data.status).send(data.statusText);
   } else {
@@ -27,7 +27,7 @@ mainCtrl.generos = async (req, res) => {
 
 mainCtrl.getGeneros = async (req, res) => {
   const page = req.query.page ? `?page=${req.query.page}` : '';
-  const data = await searchPoster(`generos/${req.params.genero}${page}`);
+  const data = await searchPoster(`/generos/${req.params.genero}${page}`);
   if (data.status) {
     res.status(data.status).send(data.statusText);
   } else {
@@ -38,7 +38,7 @@ mainCtrl.getGeneros = async (req, res) => {
 
 mainCtrl.getGenerosPeliculas = async (req, res) => {
   const page = req.query.page ? `?page=${req.query.page}` : '';
-  const data = await searchPoster(`generos/${req.params.genero}/peliculas${page}`);
+  const data = await searchPoster(`/generos/${req.params.genero}/peliculas${page}`);
   if (data.status) {
     res.status(data.status).send(data.statusText);
   } else {
@@ -49,7 +49,7 @@ mainCtrl.getGenerosPeliculas = async (req, res) => {
 
 mainCtrl.getGenerosSeries = async (req, res) => {
   const page = req.query.page ? `?page=${req.query.page}` : '';
-  const data = await searchPoster(`generos/${req.params.genero}/series${page}`);
+  const data = await searchPoster(`/generos/${req.params.genero}/series${page}`);
   if (data.status) {
     res.status(data.status).send(data.statusText);
   } else {

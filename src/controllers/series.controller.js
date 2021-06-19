@@ -8,7 +8,7 @@ const mainCtrl = {};
 
 mainCtrl.renderSeries = async (req, res) => {
   const page = req.query.page ? `?page=${req.query.page}` : '';
-  const data = await getPosters(`series${page}`);
+  const data = await getPosters(`/series${page}`);
   if (data.status) {
     res.status(data.status).send(data.statusText);
   } else {
@@ -19,7 +19,7 @@ mainCtrl.renderSeries = async (req, res) => {
 
 mainCtrl.seriesEstrenos = async (req, res) => {
   const page = req.query.page ? `?page=${req.query.page}` : '';
-  const data = await getPosters(`series/estrenos${page}`);
+  const data = await getPosters(`/series/estrenos${page}`);
   if (data.status) {
     res.status(data.status).send(data.statusText);
   } else {
@@ -30,7 +30,7 @@ mainCtrl.seriesEstrenos = async (req, res) => {
 
 mainCtrl.seriesPopulares = async (req, res) => {
   const page = req.query.page ? `?page=${req.query.page}` : '';
-  const data = await getPosters(`series/populares${page}`);
+  const data = await getPosters(`/series/populares${page}`);
   if (data.status) {
     res.status(data.status).send(data.statusText);
   } else {
@@ -40,7 +40,7 @@ mainCtrl.seriesPopulares = async (req, res) => {
 }
 
 mainCtrl.getInfoSerie = async (req, res) => {
-  const data = await getInfo(`serie/${req.params.serie}`);
+  const data = await getInfo(`/serie/${req.params.serie}`);
   if (data.status) {
     res.status(data.status).send(data.statusText);
   } else {
@@ -50,7 +50,7 @@ mainCtrl.getInfoSerie = async (req, res) => {
 }
 
 mainCtrl.reqSeasons = async (req, res) => {
-  const data = await reqSeasons(`serie/${req.params.serie}`);
+  const data = await reqSeasons(`/serie/${req.params.serie}`);
   if (data.status) {
     res.status(data.status).send(data.statusText);
   } else {
@@ -60,7 +60,7 @@ mainCtrl.reqSeasons = async (req, res) => {
 }
 
 mainCtrl.repSeries = async (req, res) => {
-  const data = await reqRepro(`serie/${req.params.serie}/temporada/${req.params.temp}/capitulo/${req.params.cap}`);
+  const data = await reqRepro(`/serie/${req.params.serie}/temporada/${req.params.temp}/capitulo/${req.params.cap}`);
   if (data.status) {
     res.status(data.status).send(data.statusText);
   } else {

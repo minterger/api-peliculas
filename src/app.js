@@ -18,5 +18,6 @@ app.use((req, res, next) => {
 app.use(require('./routes/main.routes'));
 app.use(require('./routes/peliculas.routes'));
 app.use(require('./routes/series.routes'));
+app.use(require('./routes/animes.routes'));
 
 module.exports = app;

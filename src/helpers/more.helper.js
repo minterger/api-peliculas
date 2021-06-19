@@ -1,16 +1,5 @@
 const cheerio = require('cheerio');
-const axios = require('axios');
-
-async function fetchurl(param) {
-  let url = param == null ? "" : param;
-  try {
-    const res = await axios.get(`https://pelisplushd.net/${url}`);
-    return res;
-  } catch (error) {
-    console.error(`Error: ${error.response.status} ${error.response.statusText}`);
-    return error.response;
-  }
-}
+const fetchurl = require('./url/fetch')
 
 async function searchPoster (uri) {
   try {
@@ -30,7 +19,7 @@ async function searchPoster (uri) {
         i,
         poster_link: $(el)
           .attr('href')
-          .replace(/\w{5}\W{3}(\w+\W){2}/gi, ''),
+          .replace(/\w{4,5}\W{3}(\w+\.?){1,3}/gi, ''),
         poster: $(el).find('img')
           .removeAttr('class')
           .removeAttr('srcset')
