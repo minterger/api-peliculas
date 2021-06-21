@@ -32,7 +32,7 @@ Para moverse por las paginas usa ?page='num'
   - /series/estrenos
   - /series/populares
   - /serie/:serie
-  - /serie/seasons/:serie
+  - /serie/temporadas/:serie
   - /serie/:serie/temporada/:temp/capitulo/:cap
 
 - Peliculas
@@ -49,7 +49,7 @@ Para moverse por las paginas usa ?page='num'
   - /animes/estrenos
   - /animes/populares
   - /anime/:anime
-  - /anime/seasons/:anime
+  - /anime/temporadas/:anime
   - /anime/:anime/temporada/:temp/capitulo/:cap
 
 - Buscador
@@ -62,3 +62,4 @@ Para moverse por las paginas usa ?page='num'
   - /generos/:genero
   - /generos/:genero/peliculas
   - /generos/:genero/series
+  - /generos/:genero/animes
