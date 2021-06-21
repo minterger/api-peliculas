@@ -42,7 +42,7 @@ async function searchPoster (uri) {
     const pagination =  {
       page,
       nextPage: page === lastPage ? null : page + 1,
-      prevPage: page == 1 ? null : page - 1,
+      prevPage: page === 1 ? null : page - 1,
       lastPage,
     };
 
