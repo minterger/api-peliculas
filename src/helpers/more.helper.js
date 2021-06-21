@@ -32,9 +32,9 @@ async function searchPoster (uri) {
       array.push(data);
     });
 
-    array = array.filter(function(data) {
-      return data.type !== ' Anime\n'; 
-    });
+    // array = array.filter(function(data) {
+    //   return data.type !== ' Anime\n'; 
+    // });
 
     const page = parseInt($('.page-item.active .page-link').text());
     const lastPage = parseInt($('.page-item .page-link').eq(-2).text());
