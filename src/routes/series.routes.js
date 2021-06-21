@@ -18,7 +18,7 @@ router.get('/series/populares', seriesPopulares);
 
 router.get('/serie/:serie', getInfoSerie);
 
-router.get('/serie/seasons/:serie', reqSeasons);
+router.get('/serie/temporadas/:serie', reqSeasons);
 
 router.get('/serie/:serie/temporada/:temp/capitulo/:cap', repSeries);
 

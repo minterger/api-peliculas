@@ -18,7 +18,7 @@ router.get('/animes/populares', animesPopulares);
 
 router.get('/anime/:anime', getInfoAnime);
 
-router.get('/anime/seasons/:anime', reqSeasons);
+router.get('/anime/temporadas/:anime', reqSeasons);
 
 router.get('/anime/:anime/temporada/:temp/capitulo/:cap', repAnime);
 
