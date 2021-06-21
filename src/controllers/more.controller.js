@@ -58,5 +58,15 @@ mainCtrl.getGenerosSeries = async (req, res) => {
   }
 }
 
+mainCtrl.getGenerosAnimes = async (req, res) => {
+  const page = req.query.page ? `?page=${req.query.page}` : '';
+  const data = await searchPoster(`/generos/${req.params.genero}/animes${page}`);
+  if (data.status) {
+    res.status(data.status).send(data.statusText);
+  } else {
+    res.status(200);
+    res.json(data);
+  }
+}
 
 module.exports = mainCtrl;
