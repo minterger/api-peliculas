@@ -65,6 +65,7 @@ async function getInfo(uri) {
     
     const object = {};
     object.title = $('.m-b-5').html().replace(/^\W/g, '');
+    object.poster_img = $('.img-fluid.d-block.mx-auto.m-b-30').attr('src');
     object.descripcion = $('.text-large').html().replace(/^\W/g, '');
     object.ano = $('.font-size-18.text-info.text-semibold').html().trim();
     object.data = [];
