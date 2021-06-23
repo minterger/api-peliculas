@@ -75,6 +75,7 @@ async function getInfo(uri) {
       const data = {};
       data.name = $el('span').html();
       data.content = [];
+      let fecha = $(el).text().match(/\d+\W\w+?\W\d+/g)
       if ($el('a').html()) {
         $el('a').each((i, el) => {
           const content = {
@@ -84,8 +85,9 @@ async function getInfo(uri) {
           };
           data.content.push(content);
         });
-      } else {
-        data.content.push({ fecha: $(el).text().match(/\d+\W\w+?\W\d+/g)})
+      } else if (fecha !== null) {
+        data.content.push({fecha: fecha[0]});
+        console.log(fecha[0]);
       }
       object.data.push(data);
     });
