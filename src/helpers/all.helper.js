@@ -85,7 +85,7 @@ async function getInfo(uri) {
           data.content.push(content);
         });
       } else {
-        data.content = $(el).text().match(/\d+\W\w+?\W\d+/g);
+        data.content.push({ fecha: $(el).text().match(/\d+\W\w+?\W\d+/g)})
       }
       object.data.push(data);
     });
