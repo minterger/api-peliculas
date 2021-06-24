@@ -63,3 +63,15 @@ Para moverse por las paginas usa ?page='num'
   - /generos/:genero/peliculas
   - /generos/:genero/series
   - /generos/:genero/animes
+
+- Años
+
+  - /years
+  - /year/:year
+  - /year/:year/peliculas
+  - /year/:year/series
+  - /year/:year/animes
+
+- Estrenos Ultimo Año
+
+  - /estrenos

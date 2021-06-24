@@ -45,11 +45,32 @@ async function searchPoster (uri) {
       prevPage: page === 1 ? null : page - 1,
       lastPage,
     };
-
+    
     return {
       posters: array,
       pagination
     };
+    
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+}
+
+async function reqEstrenos(uri) {
+  try {
+    const html = await fetchurl(uri);
+    if (html.status !== 200) {
+      return {
+        status: html.status,
+        statusText: html.statusText
+      }
+    }
+    const $ = cheerio.load(html.data);
+
+    const href = $('.nav-item .dropdown-menu').eq(4).find('a').attr('href')
+    
+    return await searchPoster(href);
 
   } catch (error) {
     console.error(error);
@@ -85,7 +106,37 @@ async function reqGenders(uri) {
   }
 }
 
+async function reqYears(uri) {
+  try {
+    const html = await fetchurl(uri);
+    if (html.status !== 200) {
+      return {
+        status: html.status,
+        statusText: html.statusText
+      }
+    }
+    const $ = cheerio.load(html.data);
+      
+    const array = []
+    $('.nav-item .dropdown-menu').eq(4).find('a').each((i, el) => {
+      const $el = $(el);
+      const object = {
+        name: $el.text(),
+        href: $el.attr('href')
+      };
+      array.push(object);
+    });
+
+    return array;
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+}
+
 module.exports = {
   searchPoster,
-  reqGenders
+  reqEstrenos,
+  reqGenders,
+  reqYears
 }
