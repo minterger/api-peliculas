@@ -18,7 +18,8 @@ mainCtrl.search = async (req, res) => {
 }
 
 mainCtrl.getEstrenos = async (req, res) => {
-  const data = await reqEstrenos('');
+  // const data = await reqEstrenos('');
+  const data = await searchPoster(`/year/${process.env.YEAR_ESTRENO}`);
   if (data.status) {
     res.status(data.status).send(data.statusText);
   } else {
