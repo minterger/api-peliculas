@@ -25,7 +25,7 @@ npm run dev
 ## Variables de Entorno
 
 * YEAR_ESTRENO=año --> reemplace año por el año mas actual para traer las peliculas de estreno
-* PORT=puerto --> reemplace puerto por el puerto que decea usar
+* PORT=puerto --> reemplace puerto por el puerto que desea usar
 
 ---
 
