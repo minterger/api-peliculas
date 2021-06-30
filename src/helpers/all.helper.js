@@ -157,10 +157,20 @@ async function reqRepro (uri) {
       }
     }
     const $ = cheerio.load(html.data);
-    const video = $('.player script').html()
+    const data = {};
+    if ($('.btn.btn.btn-primary.btn-block').length) {
+      data.navegacion = []
+      $('.btn.btn.btn-primary.btn-block').each((i, el) => {
+        data.navegacion.push({
+          text: $(el).text(),
+          href: $(el).attr('href').replace(/\w{4,5}\W{3}(\w+\.?){1,3}/gi, '')
+        })
+      })
+    }
+    data.reproductores = $('.player script').html()
       .match(/(https?:\/\/)[/a-z.0-9A-Z\-?=#%&]+/g);
 
-    return video;
+    return data;
   } catch (error) {
     console.error(error);
     return error;
