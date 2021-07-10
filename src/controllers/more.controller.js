@@ -136,4 +136,48 @@ mainCtrl.getYearAnimes = async (req, res) => {
   }
 }
 
+mainCtrl.getPais = async (req, res) => {
+  const page = req.query.page ? `?page=${req.query.page}` : '';
+  const data = await searchPoster(`/pais/${req.params.pais}${page}`);
+  if (data.status) {
+    res.status(data.status).send(data.statusText);
+  } else {
+    res.status(200);
+    res.json(data);
+  }
+}
+
+mainCtrl.getActor = async (req, res) => {
+  const page = req.query.page ? `?page=${req.query.page}` : '';
+  const data = await searchPoster(`/actor/${req.params.actor}${page}`);
+  if (data.status) {
+    res.status(data.status).send(data.statusText);
+  } else {
+    res.status(200);
+    res.json(data);
+  }
+}
+
+mainCtrl.getDirector = async (req, res) => {
+  const page = req.query.page ? `?page=${req.query.page}` : '';
+  const data = await searchPoster(`/director/${req.params.director}${page}`);
+  if (data.status) {
+    res.status(data.status).send(data.statusText);
+  } else {
+    res.status(200);
+    res.json(data);
+  }
+}
+
+mainCtrl.getEscritor = async (req, res) => {
+  const page = req.query.page ? `?page=${req.query.page}` : '';
+  const data = await searchPoster(`/escritor/${req.params.escritor}${page}`);
+  if (data.status) {
+    res.status(data.status).send(data.statusText);
+  } else {
+    res.status(200);
+    res.json(data);
+  }
+}
+
 module.exports = mainCtrl;

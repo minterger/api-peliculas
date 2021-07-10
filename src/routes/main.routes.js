@@ -13,7 +13,11 @@ const {
   getYear,
   getYearPeliculas,
   getYearSeries,
-  getYearAnimes
+  getYearAnimes,
+  getPais,
+  getActor,
+  getDirector,
+  getEscritor
 } = require('../controllers/more.controller')
 
 router.get('/search', search);
@@ -39,5 +43,13 @@ router.get('/year/:year/peliculas', getYearPeliculas);
 router.get('/year/:year/series', getYearSeries);
 
 router.get('/year/:year/animes', getYearAnimes);
+
+router.get('/pais/:pais', getPais);
+
+router.get('/actor/:actor', getActor);
+
+router.get('/director/:director', getDirector);
+
+router.get('/escritor/:escritor', getEscritor);
 
 module.exports = router;
