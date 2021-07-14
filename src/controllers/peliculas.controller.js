@@ -5,57 +5,42 @@ const {
 } = require('../helpers/all.helper');
 const mainCtrl = {};
 
-mainCtrl.renderPeliculas = async (req, res) => {
-  const page = req.query.page ? `?page=${req.query.page}` : '';
-  const data = await getPosters(`/peliculas${page}`);
+function response(data, req, res) {
   if (data.status) {
-    res.status(data.status).send(data.statusText);
+    res.status(data.status)
+    res.json({text: data.statusText + '. Vea la documentacion en: ' + req.get('host')});
   } else {
     res.status(200);
     res.json(data);
   }
+}
+
+mainCtrl.renderPeliculas = async (req, res) => {
+  const page = req.query.page ? `?page=${req.query.page}` : '';
+  const data = await getPosters(`/peliculas${page}`);
+  response(data, req, res);
 }
 
 mainCtrl.peliculasEstrenos = async (req, res) => {
   const page = req.query.page ? `?page=${req.query.page}` : '';
   const data = await getPosters(`/peliculas/estrenos${page}`);
-  if (data.status) {
-    res.status(data.status).send(data.statusText);
-  } else {
-    res.status(200);
-    res.json(data);
-  }
+  response(data, req, res);
 }
 
 mainCtrl.peliculasPopulares = async (req, res) => {
   const page = req.query.page ? `?page=${req.query.page}` : '';
   const data = await getPosters(`/peliculas/populares${page}`);
-  if (data.status) {
-    res.status(data.status).send(data.statusText);
-  } else {
-    res.status(200);
-    res.json(data);
-  }
+  response(data, req, res);
 }
 
 mainCtrl.getInfoPelicula = async (req, res) => {
   const data = await getInfo(`/pelicula/${req.params.pelicula}`);
-  if (data.status) {
-    res.status(data.status).send(data.statusText);
-  } else {
-    res.status(200);
-    res.json(data);
-  }
+  response(data, req, res);
 }
 
 mainCtrl.repPeliculas = async (req, res) => {
   const data = await reqRepro(`/pelicula/${req.params.pelicula}`);
-  if (data.status) {
-    res.status(data.status).send(data.statusText);
-  } else {
-    res.status(200);
-    res.json(data);
-  }
+  response(data, req, res);
 }
 
 module.exports = mainCtrl;

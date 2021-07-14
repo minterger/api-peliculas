@@ -33,7 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 // others routes
 app.get('*', (req, res) => {
   let url = req.get('host')
-  res.json({text: 'Esta ruta no existe. Vea la documentacion en: ' + url}).status(404);
+  res.json({text: 'Not Found. Vea la documentacion en: ' + url}).status(404);
 })
 
 
