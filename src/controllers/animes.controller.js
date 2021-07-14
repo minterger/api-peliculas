@@ -19,7 +19,7 @@ function response(data, req, res) {
 mainCtrl.renderAnimes = async (req, res) => {
   const page = req.query.page ? `?page=${req.query.page}` : '';
   const data = await getPosters(`/animes${page}`);
-  response(data, req, req, res);
+  response(data, req, res);
 }
 
 mainCtrl.animesEstrenos = async (req, res) => {
