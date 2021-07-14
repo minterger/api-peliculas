@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="#" type="image/x-icon">
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    a {
+      color: cornflowerblue;
+    }
+    a:hover {
+      color: rgb(83, 132, 223);
+    }
+
+
+    .hide {
+      transform: scale(0);
+    }
+
+    .top {
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      bottom: 15px;
+      right: 15px;
+      text-decoration: none;
+      border-radius: 50%;
+      background-color: #0E1014;
+      height: 50px;
+      width: 50px;
+      transition: transform .3s;
+    }
+    .top:hover {
+      transform: scale(1.1);
+    }
+
+    .top:focus-within {
+      border: 3px solid rgba(0, 0, 0, 0.665);
+    }
+  </style>
+  <title>Api PelisLatino</title>
+</head>
+<body>
+  <div class='container mb-5' id="top">
+    <h1 class="text-center my-3">PelisLatino API</h1>
+    <h2>Documentacion de la API</h2>
+
+    <div class="mt-2">
+      <a class="btn btn-primary my-1" href="#peliculas">#Peliculas</a>
+      <a class="btn btn-primary my-1" href="#series">#Series</a>
+      <a class="btn btn-primary my-1" href="#animes">#Animes</a>
+      <a class="btn btn-primary my-1" href="#buscador">#Buscador</a>
+      <a class="btn btn-primary my-1" href="#generos">#Generos</a>
+      <a class="btn btn-primary my-1" href="#anos">#Años</a>
+      <a class="btn btn-primary my-1" href="#estrenos">#Estrenos</a>
+    </div>
+    
+    <h4 class="mt-3">Peticiones o datos que se puden llegar a encontrar</h4>
+    <div>
+      <span class="badge bg-success">GET</span> peticion GET
+    </div>
+    <div>
+      <span class="badge bg-warning">POST</span> peticion POST
+    </div>
+    <div>
+      <span class="badge bg-danger">DELETE</span> peticion DELETE
+    </div>
+    <div>
+      <span class="badge bg-primary">PARAMS</span> urn con parametros
+    </div>
+    <div>
+      <span class="badge bg-secondary">QUERY</span> queries
+    </div>
+
+    <hr id="peliculas">
+    <h2>Peliculas</h2>
+
+    <h5>Obtener los Posters de Peliculas<br/></h5>
+    <ul>
+      <li class="my-2">
+        <span class="badge bg-success">GET</span> <a href="/peliculas">/peliculas</a> obtiene los posters de las peliculas. 
+        <br/>Para navegar entre paginas usa el query <span class="badge bg-secondary">?page</span>. ej: <span class="badge bg-success">GET</span>  <a href="/peliculas?page=3">/peliculas?page=3</a>
+      </li>
+      <li class="my-2">
+        <span class="badge bg-success">GET</span> <a href="/peliculas/populares">/peliculas/populares</a> para traer los posters de las peliculas populares. 
+        <br/>Para navegar entre paginas usa el query <span class="badge bg-secondary">?page</span>. ej: <span class="badge bg-success">GET</span>  <a href="/peliculas/populares?page=3">/peliculas/populares?page=3</a>
+      </li>
+      <li class="my-2">
+        <span class="badge bg-success">GET</span> <a href="/peliculas/estrenos">/peliculas/estrenos</a> para traer los posters de las peliculas estrenos. 
+        <br/>Para navegar entre paginas usa el query <span class="badge bg-secondary">?page</span>. ej: <span class="badge bg-success">GET</span>  <a href="/peliculas/estrenos?page=3">/peliculas/estrenos?page=3</a>
+      </li>
+    </ul>
+
+    <h5>Obtener informacion de una Pelicula</h5>
+    <ul>
+      <li class="my-2">
+        usa <span class="badge bg-primary">/peliculas/:info</span> para traer la informacion de una pelicula. 
+        ej: <span class="badge bg-success">GET</span> <a href="/pelicula/friends-the-reunion">/pelicula/friends-the-reunion</a>
+      </li>
+    </ul>
+
+    <h5>Obtener reproductores de una Pelicula</h5>
+    <ul>
+      <li class="my-2">
+        usa <span class="badge bg-primary">/peliculas/rep/:info</span> para traer todos los reproductores de una pelicula. ej: <span class="badge bg-success">GET</span> <a href="/pelicula/rep/friends-the-reunion">/pelicula/rep/friends-the-reunion</a>
+      </li>
+    </ul>
+
+    <hr id="series">
+    <h2>Series</h2>
+
+    <h5>Obtener los Posters de Series<br/></h5>
+    <ul>
+      <li class="my-2">
+        <span class="badge bg-success">GET</span> <a href="/series">/series</a> obtiene los posters de las series. 
+        <br/>Para navegar entre paginas usa el query <span class="badge bg-secondary">?page</span>. ej: <span class="badge bg-success">GET</span>  <a href="/series?page=3">/series?page=3</a>
+      </li>
+      <li class="my-2">
+        <span class="badge bg-success">GET</span> <a href="/series/populares">/series/populares</a> para traer los posters de las series populares. 
+        <br/>Para navegar entre paginas usa el query <span class="badge bg-secondary">?page</span>. ej: <span class="badge bg-success">GET</span>  <a href="/series/populares?page=3">/series/populares?page=3</a>
+      </li>
+      <li class="my-2">
+        <span class="badge bg-success">GET</span> <a href="/series/estrenos">/series/estrenos</a> para traer los posters de las series estrenos. 
+        <br/>Para navegar entre paginas usa el query <span class="badge bg-secondary">?page</span>. ej: <span class="badge bg-success">GET</span>  <a href="/series/estrenos?page=3">/series/estrenos?page=3</a>
+      </li>
+    </ul>
+
+    <h5>Obtener informacion de una Serie</h5>
+    <ul>
+      <li class="my-2">
+        usa <span class="badge bg-primary">/serie/:info</span> para traer la informacion de una serie. ej: <span class="badge bg-success">GET</span> <a href="/serie/the-flash">/serie/the-flash</a>
+      </li>
+    </ul>
+
+    <h5>Obtener temporadas de una Serie</h5>
+    <ul>
+      <li class="my-2">
+        usa <span class="badge bg-primary">/serie/temporadas/:info</span> para traer todas las temporadas de una serie. ej: <span class="badge bg-success">GET</span> <a href="/serie/temporadas/the-flash">/serie/temporadas/the-flash</a>
+      </li>
+    </ul>
+
+    <h5>Obtener reproductores de una Serie</h5>
+    <ul>
+      <li class="my-2">
+        usa <span class="badge bg-primary">/serie/:info/temporada/:temporada/capitulo/:capitulo</span> para traer todas los reproductores de una serie  y ver las opciones de navegacion entre capitulos. 
+        <br/>ej: <span class="badge bg-success">GET</span> <a href="/serie/the-flash/temporada/2/capitulo/16">/serie/the-flash/temporada/2/capitulo/16</a>
+      </li>
+    </ul>
+
+    <hr id="animes">
+    <h2>Animes</h2>
+
+    <h5>Obtener los Posters de Animes<br/></h5>
+    <ul>
+      <li class="my-2">
+        <span class="badge bg-success">GET</span> <a href="/animes">/animes</a> obtiene los posters de las animes. 
+        <br/>Para navegar entre paginas usa el query <span class="badge bg-secondary">?page</span>. ej: <span class="badge bg-success">GET</span>  <a href="/animes?page=3">/animes?page=3</a>
+      </li>
+      <li class="my-2">
+        <span class="badge bg-success">GET</span> <a href="/animes/populares">/animes/populares</a> para traer los posters de las animes populares. 
+        <br/>Para navegar entre paginas usa el query <span class="badge bg-secondary">?page</span>. ej: <span class="badge bg-success">GET</span>  <a href="/animes/populares?page=3">/animes/populares?page=3</a>
+      </li>
+      <li class="my-2">
+        <span class="badge bg-success">GET</span> <a href="/animes/estrenos">/animes/estrenos</a> para traer los posters de las animes estrenos, por el momento esta vacio. 
+        <br/>Para navegar entre paginas usa el query <span class="badge bg-secondary">?page</span>. ej: <span class="badge bg-success">GET</span>  <a href="/animes/estrenos?page=3">/animes/estrenos?page=3</a>
+      </li>
+    </ul>
+
+    <h5>Obtener informacion de un Anime</h5>
+    <ul>
+      <li class="my-2">
+        usa <span class="badge bg-primary">/anime/:info</span> para traer la informacion de una anime. ej: <span class="badge bg-success">GET</span> <a href="/anime/trese">/anime/trese</a>
+      </li>
+    </ul>
+
+    <h5>Obtener temporadas de un Anime</h5>
+    <ul>
+      <li class="my-2">
+        usa <span class="badge bg-primary">/anime/temporadas/:info</span> para traer todas las temporadas de una anime. ej: <span class="badge bg-success">GET</span> <a href="/anime/temporadas/trese">/anime/temporadas/trese</a>
+      </li>
+    </ul>
+
+    <h5>Obtener reproductores de un Anime</h5>
+    <ul>
+      <li class="my-2">
+        usa <span class="badge bg-primary">/anime/:info/temporada/:temporada/capitulo/:capitulo</span> para traer todas los reproductores de un anime y ver las opciones de navegacion entre capitulos. 
+        <br/>ej: <span class="badge bg-success">GET</span> <a href="/anime/trese/temporada/1/capitulo/4">/anime/trese/temporada/1/capitulo/4</a>
+      </li>
+    </ul>
+
+    <hr id="buscador">
+    <h2>Buscador</h2>
+    <h5>Buscar una pelicula, serie o anime</h5>
+    <ul>
+      <li class="my-2">
+        Para buscar una pelicula usa la ruta <span class="badge bg-primary">/search</span> mas la query <span class="badge bg-secondary">?s</span>. ej: <span class="badge bg-success">GET</span> <a href="/search?s=terror">/search?s=terror</a>
+        <br/>Para navegar entre paginas usa el query <span class="badge bg-secondary">?page</span> ej: <span class="badge bg-success">GET</span>  <a href="/search?s=terror&page=3">/search?s=terror&page=3</a>
+      </li>
+    </ul>
+
+    <hr id="generos">
+    <h2>Generos</h2>
+    <h5>Traer una lista basica de Generos</h5>
+    <ul>
+      <li class="my-2">
+        <span class="badge bg-success">GET</span> <a href="/generos">/generos</a> para traer una lista basica de generos
+      </li>
+    </ul>
+
+    <h5>Trear todos los posters de un Genero</h5>
+    <ul>
+      <li class="my-2">
+        <span class="badge bg-primary">/generos/:genero</span> para traer todos los posters de un genero, de todos los tipos (peliculas, series y animes). ej <span class="badge bg-success">GET</span> <a href="/generos/accion">/generos/accion</a>
+      </li>
+    </ul>
+
+    <h5>Trear todos los posters de peliculas de un Genero</h5>
+    <ul>
+      <li class="my-2">
+        <span class="badge bg-primary">/generos/:genero/peliculas</span> para traer todos los posters de peliculas de un genero. ej <span class="badge bg-success">GET</span> <a href="/generos/accion/peliculas">/generos/accion/peliculas</a>
+      </li>
+    </ul>
+
+    <h5>Trear todos los posters de series de un Genero</h5>
+    <ul>
+      <li class="my-2">
+        <span class="badge bg-primary">/generos/:genero/series</span> para traer todos los posters de series de un genero. ej <span class="badge bg-success">GET</span> <a href="/generos/accion/series">/generos/accion/series</a>
+      </li>
+    </ul>
+
+    <h5>Trear todos los posters de animes de un Genero</h5>
+    <ul>
+      <li class="my-2">
+        <span class="badge bg-primary">/generos/:genero/animes</span> para traer todos los posters de animes de un genero. ej <span class="badge bg-success">GET</span> <a href="/generos/accion/animes">/generos/accion/animes</a>
+      </li>
+    </ul>
+
+    <hr id="anos">
+    <h2>Años</h2>
+    <h5>Traer una lista de todos los Años</h5>
+    <ul>
+      <li class="my-2">
+        <span class="badge bg-success">GET</span> <a href="/years">/years</a> para traer una lista de todos los años que contienen peliculas, series y animes
+      </li>
+    </ul>
+
+    <h5>Trear todos los posters de un Año</h5>
+    <ul>
+      <li class="my-2">
+        <span class="badge bg-primary">/year/:year</span> para traer todos los posters de un año, de todos los tipos (peliculas, series y animes). ej <span class="badge bg-success">GET</span> <a href="/year/2021">/year/2021</a>
+      </li>
+    </ul>
+
+    <h5>Trear todos los posters de peliculas de un Año</h5>
+    <ul>
+      <li class="my-2">
+        <span class="badge bg-primary">/year/:year/peliculas</span> para traer todos los posters de peliculas de un año. ej <span class="badge bg-success">GET</span> <a href="/year/2021/peliculas">/year/2021/peliculas</a>
+      </li>
+    </ul>
+
+    <h5>Trear todos los posters de series de un Año</h5>
+    <ul>
+      <li class="my-2">
+        <span class="badge bg-primary">/year/:year/series</span> para traer todos los posters de series de un año. ej <span class="badge bg-success">GET</span> <a href="/year/2021/series">/year/2021/series</a>
+      </li>
+    </ul>
+
+    <h5>Trear todos los posters de animes de un Año</h5>
+    <ul>
+      <li class="my-2">
+        <span class="badge bg-primary">/year/:year/animes</span> para traer todos los posters de animes de un año. ej <span class="badge bg-success">GET</span> <a href="/year/2021/animes">/year/2021/animes</a>
+      </li>
+    </ul>
+
+    <hr id="estrenos">
+    <h2>Estrenos</h2>
+    <h5>Traer una lista de las ultimas peliculas, series y animes subidos del ultimo año</h5>
+    <ul>
+      <li class="my-2">
+        <span class="badge bg-success">GET</span> <a href="/estrenos">/estrenos</a> traer una lista de posters de peliculas, series y animes subidos este ultimo año.
+      </li>
+    </ul>
+
+  </div>
+
+  <a class="top hide" id="topButton" href="#top">
+    <img src="/arrow-top.svg">
+  </a>
+
+  <script>
+    const topButton = document.getElementById('topButton')
+
+    function scrollSpy(scrollY) {
+      if (scrollY < 120) {
+        topButton.classList.add('hide')
+      } else { 
+        topButton.classList.remove('hide')
+      }
+    }
+    
+    scrollSpy(window.scrollY)
+
+    window.addEventListener('scroll', (e) => {
+      scrollSpy(window.scrollY)
+    })
+  </script>
+</body>
+</html>
