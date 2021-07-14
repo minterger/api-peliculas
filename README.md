@@ -31,7 +31,15 @@ npm run dev
 
 ## Peticiones
 
-Para moverse por las paginas usa ?page='num' 
+Para moverse por las paginas usa la query ?page='num' 
+
+- Peliculas
+
+  - /peliculas
+  - /peliculas/estrenos
+  - /peliculas/populares
+  - /pelicula/:pelicula
+  - /pelicula/rep/:pelicula
 
 - Series
 
@@ -41,14 +49,6 @@ Para moverse por las paginas usa ?page='num'
   - /serie/:serie
   - /serie/temporadas/:serie
   - /serie/:serie/temporada/:temp/capitulo/:cap
-
-- Peliculas
-
-  - /peliculas
-  - /peliculas/estrenos
-  - /peliculas/populares
-  - /pelicula/:pelicula
-  - /pelicula/rep/:pelicula
 
 - Animes
 
