@@ -14,6 +14,10 @@
       color: rgb(83, 132, 223);
     }
 
+    .hljs {
+      max-height: 300px;
+    }
+
 
     .hide {
       transform: scale(0);
@@ -42,6 +46,9 @@
       border: 3px solid rgba(0, 0, 0, 0.665);
     }
   </style>
+  
+  <link rel="stylesheet"
+    href="/highlight/colors.min.css">  
   <title>Api PelisLatino</title>
 </head>
 <body>
@@ -75,7 +82,7 @@
     <div>
       <span class="badge bg-secondary">QUERY</span> queries
     </div>
-
+    
     <hr id="peliculas">
     <h2>Peliculas</h2>
 
@@ -84,14 +91,777 @@
       <li class="my-2">
         <span class="badge bg-success">GET</span> <a href="/peliculas">/peliculas</a> obtiene los posters de las peliculas. 
         <br/>Para navegar entre paginas usa el query <span class="badge bg-secondary">?page</span>. ej: <span class="badge bg-success">GET</span>  <a href="/peliculas?page=3">/peliculas?page=3</a>
+        <pre>
+          <code class="hjls language-json">
+{
+  "posters": [
+    {
+      "i": 0,
+      "poster_link": "/pelicula/la-segunda",
+      "poster": {
+        "alt": "VER La segunda (2020) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/o1WvNhoackad1QiAGRgjJCQ1Trj.jpg"
+      },
+      "title": "La segunda (2020)",
+      "raiting": "4.5/10"
+    },
+    {
+      "i": 1,
+      "poster_link": "/pelicula/bia-un-mundo-al-reves",
+      "poster": {
+        "alt": "VER BIA: Un Mundo al Revés (2021) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/eIxLHFMAsdbZGZws0duowTa4N6k.jpg"
+      },
+      "title": "BIA: Un Mundo al Revés (2021)",
+      "raiting": "7.9/10"
+    },
+    {
+      "i": 2,
+      "poster_link": "/pelicula/a-ciegas-2020",
+      "poster": {
+        "alt": "VER A Ciegas (2020) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/leCkJsZbQDULb0x5EocYs0JEloF.jpg"
+      },
+      "title": "A Ciegas (2020)",
+      "raiting": "7.2/10"
+    },
+    {
+      "i": 3,
+      "poster_link": "/pelicula/la-clasica-historia-de-terror",
+      "poster": {
+        "alt": "VER La Clásica Historia de Terror (2021) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/eErd3FqwgeRUcskfxkzFHqQf7F3.jpg"
+      },
+      "title": "La Clásica Historia de Terror (2021)",
+      "raiting": "7.5/10"
+    },
+    {
+      "i": 4,
+      "poster_link": "/pelicula/yo-soy-bruce-lee",
+      "poster": {
+        "alt": "VER Yo soy Bruce Lee (2012) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/bvHjKTLFIHOHzl0arxzu2fYtLfR.jpg"
+      },
+      "title": "Yo soy Bruce Lee (2012)",
+      "raiting": "7.7/10"
+    },
+    {
+      "i": 5,
+      "poster_link": "/pelicula/el-sombrerero-loco",
+      "poster": {
+        "alt": "VER El Sombrerero Loco (2021) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/27NwG8BUB0ohxAXDAGHUD6E12aJ.jpg"
+      },
+      "title": "El Sombrerero Loco (2021)",
+      "raiting": "7.3/10"
+    },
+    {
+      "i": 6,
+      "poster_link": "/pelicula/el-mundo-miraculous-shanghai-la-leyenda-de-ladydragon",
+      "poster": {
+        "alt": "VER El Mundo Miraculous: Shanghái, la leyenda de LadyDragon (2021) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/r6zthVPVoq1urTOsLgofPGel89d.jpg"
+      },
+      "title": "El Mundo Miraculous: Shanghái, la leyenda de LadyDragon (2021)",
+      "raiting": "7.9/10"
+    },
+    {
+      "i": 7,
+      "poster_link": "/pelicula/como-me-converti-en-superheroe",
+      "poster": {
+        "alt": "VER Cómo me convertí en superhéroe (2020) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/1tcQdrmvVooaZs6niLIX1DnaZxB.jpg"
+      },
+      "title": "Cómo me convertí en superhéroe (2020)",
+      "raiting": "6.7/10"
+    },
+    {
+      "i": 8,
+      "poster_link": "/pelicula/aquel-verano",
+      "poster": {
+        "alt": "VER Aquel verano (2020) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/s2OLfim4v1WvgTzP0VjuBCISS2L.jpg"
+      },
+      "title": "Aquel verano (2020)",
+      "raiting": "6.5/10"
+    },
+    {
+      "i": 9,
+      "poster_link": "/pelicula/igor-grom-contra-el-doctor-peste",
+      "poster": {
+        "alt": "VER Igor Grom contra el Doctor Peste (2021) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/zI4yOVjcC51FNI1K3H5poIfm8Wn.jpg"
+      },
+      "title": "Igor Grom contra el Doctor Peste (2021)",
+      "raiting": "7.4/10"
+    },
+    {
+      "i": 10,
+      "poster_link": "/pelicula/la-calle-del-terror-parte-2-1978",
+      "poster": {
+        "alt": "VER La calle del terror, Parte 2: 1978 (2021) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/i9CNNS5htRdTf11A63lNKQyYyhj.jpg"
+      },
+      "title": "La calle del terror, Parte 2: 1978 (2021)",
+      "raiting": "7.4/10"
+    },
+    {
+      "i": 11,
+      "poster_link": "/pelicula/el-hombre-agua",
+      "poster": {
+        "alt": "VER El hombre agua (2020) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/krupbFlSTnnKIjpRryrg2CTdeIL.jpg"
+      },
+      "title": "El hombre agua (2020)",
+      "raiting": "6.9/10"
+    },
+    {
+      "i": 12,
+      "poster_link": "/pelicula/viuda-negra",
+      "poster": {
+        "alt": "VER Viuda Negra (2021) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/v1XE3dtqd9zsEET0EMkxBgXYP6T.jpg"
+      },
+      "title": "Viuda Negra (2021)",
+      "raiting": "7.5/10"
+    },
+    {
+      "i": 13,
+      "poster_link": "/pelicula/espiral-el-juego-del-miedo-continua",
+      "poster": {
+        "alt": "VER Espiral: El juego del miedo continúa (2021) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/vgpzkh96GnlRxUYZuOpdZT78T2Q.jpg"
+      },
+      "title": "Espiral: El juego del miedo continúa (2021)",
+      "raiting": "6.3/10"
+    },
+    {
+      "i": 14,
+      "poster_link": "/pelicula/un-milagro-inesperado",
+      "poster": {
+        "alt": "VER Un Milagro Inesperado (2020) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/5l6k0Z9tYddXW9327V2jZrfWG00.jpg"
+      },
+      "title": "Un Milagro Inesperado (2020)",
+      "raiting": "7.2/10"
+    },
+    {
+      "i": 15,
+      "poster_link": "/pelicula/un-lugar-en-silencio-parte-ii",
+      "poster": {
+        "alt": "VER Un Lugar en Silencio: Parte II (2021) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/iNOCVFyrsykGqT48JNotgFF9XCf.jpg"
+      },
+      "title": "Un Lugar en Silencio: Parte II (2021)",
+      "raiting": "7.8/10"
+    },
+    {
+      "i": 16,
+      "poster_link": "/pelicula/jefe-en-panales-2-negocios-de-familia",
+      "poster": {
+        "alt": "VER Jefe en pañales 2: Negocios de familia (2021) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/3XYeAnIdjTiHZehtKcNzsyBwtcz.jpg"
+      },
+      "title": "Jefe en pañales 2: Negocios de familia (2021)",
+      "raiting": "7.7/10"
+    },
+    {
+      "i": 17,
+      "poster_link": "/pelicula/la-calle-del-terror-parte-1",
+      "poster": {
+        "alt": "VER La calle del terror - Parte 1 (2021) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/2JG46f4JtCJTUf2z9UbiL9qusOP.jpg"
+      },
+      "title": "La calle del terror - Parte 1 (2021)",
+      "raiting": "6.7/10"
+    },
+    {
+      "i": 18,
+      "poster_link": "/pelicula/ni-un-paso-en-falso",
+      "poster": {
+        "alt": "VER Ni un paso en falso (2021) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/ajp3bIdPhmTrmDFy019u7jixwHX.jpg"
+      },
+      "title": "Ni un paso en falso (2021)",
+      "raiting": "7.1/10"
+    },
+    {
+      "i": 19,
+      "poster_link": "/pelicula/la-8a-noche",
+      "poster": {
+        "alt": "VER La 8ª Noche (2021) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/dPR5pAL8LjoO8q4rQ7knhzu0TjO.jpg"
+      },
+      "title": "La 8ª Noche (2021)",
+      "raiting": "8/10"
+    },
+    {
+      "i": 20,
+      "poster_link": "/pelicula/la-guerra-del-manana",
+      "poster": {
+        "alt": "VER La Guerra Del Mañana (2021) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/hBcdtoe3Vu8MacviGjkJRd0U1BG.jpg"
+      },
+      "title": "La Guerra Del Mañana (2021)",
+      "raiting": "9.5/10"
+    },
+    {
+      "i": 21,
+      "poster_link": "/pelicula/dia-de-redencion",
+      "poster": {
+        "alt": "VER Día de redención (2021) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/y1Tk1LUwS3nRlugiXnag6Bu1ToG.jpg"
+      },
+      "title": "Día de redención (2021)",
+      "raiting": "7/10"
+    },
+    {
+      "i": 22,
+      "poster_link": "/pelicula/mobile-suit-gundam-hathaway",
+      "poster": {
+        "alt": "VER Mobile Suit Gundam: Hathaway (2021) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/rZ0JtG3VUWYGuE7j5JlmCQlcssl.jpg"
+      },
+      "title": "Mobile Suit Gundam: Hathaway (2021)",
+      "raiting": "7.7/10"
+    },
+    {
+      "i": 23,
+      "poster_link": "/pelicula/estados-unidos-la-pelicula",
+      "poster": {
+        "alt": "VER Estados Unidos : La Pelicula (2021) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/dOheGvNG4lIGA4NSBcSxuYpaLiX.jpg"
+      },
+      "title": "Estados Unidos : La Pelicula (2021)",
+      "raiting": "6.3/10"
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "nextPage": 2,
+    "prevPage": null,
+    "lastPage": 290
+  }
+}
+          </code>
+        </pre>
       </li>
       <li class="my-2">
         <span class="badge bg-success">GET</span> <a href="/peliculas/populares">/peliculas/populares</a> para traer los posters de las peliculas populares. 
         <br/>Para navegar entre paginas usa el query <span class="badge bg-secondary">?page</span>. ej: <span class="badge bg-success">GET</span>  <a href="/peliculas/populares?page=3">/peliculas/populares?page=3</a>
+        <pre>
+          <code class="hljs language-json">
+{
+  "posters": [
+    {
+      "i": 0,
+      "poster_link": "/pelicula/moana",
+      "poster": {
+        "alt": "VER Moana (2016) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/n7AJMME1l8xg3S7OKoFasW13N5l.jpg"
+      },
+      "title": "Moana (2016)",
+      "raiting": "7.5/10"
+    },
+    {
+      "i": 1,
+      "poster_link": "/pelicula/escuadron-suicida",
+      "poster": {
+        "alt": "VER Escuadrón suicida (2016) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/yTseJc5xJp4J3FOLXxkTycbGOCz.jpg"
+      },
+      "title": "Escuadrón suicida (2016)",
+      "raiting": "5.9/10"
+    },
+    {
+      "i": 2,
+      "poster_link": "/pelicula/capitan-america-3-civil-war",
+      "poster": {
+        "alt": "VER Capitán América 3: Civil War (2016) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/tjX3FRx21emmwA30QwXaU39mHoT.jpg"
+      },
+      "title": "Capitán América 3: Civil War (2016)",
+      "raiting": "7.3/10"
+    },
+    {
+      "i": 3,
+      "poster_link": "/pelicula/san-andres",
+      "poster": {
+        "alt": "VER San Andrés (2015) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/2Gfjn962aaFSD6eST6QU3oLDZTo.jpg"
+      },
+      "title": "San Andrés (2015)",
+      "raiting": "6.1/10"
+    },
+    {
+      "i": 4,
+      "poster_link": "/pelicula/guardianes-de-la-galaxia-vol-2",
+      "poster": {
+        "alt": "VER Guardianes de la galaxia Vol. 2 (2017) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/y4MBh0EjBlMuOzv9axM4qJlmhzz.jpg"
+      },
+      "title": "Guardianes de la galaxia Vol. 2 (2017)",
+      "raiting": "7.7/10"
+    },
+    {
+      "i": 5,
+      "poster_link": "/pelicula/transformers-el-ultimo-caballero",
+      "poster": {
+        "alt": "VER Transformers: El último caballero (2017) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/s5HQf2Gb3lIO2cRcFwNL9sn1o1o.jpg"
+      },
+      "title": "Transformers: El último caballero (2017)",
+      "raiting": "6/10"
+    },
+    {
+      "i": 6,
+      "poster_link": "/pelicula/los-juegos-del-hambre-sinsajo-parte-1",
+      "poster": {
+        "alt": "VER Los juegos del hambre: Sinsajo - Parte 1 (2014) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/4FAA18ZIja70d1Tu5hr5cj2q1sB.jpg"
+      },
+      "title": "Los juegos del hambre: Sinsajo - Parte 1 (2014)",
+      "raiting": "6.7/10"
+    },
+    {
+      "i": 7,
+      "poster_link": "/pelicula/terminator-genesis",
+      "poster": {
+        "alt": "VER Terminator Génesis (2015) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/vky6H7mCBjSsg1GMGJtJpGUeVS1.jpg"
+      },
+      "title": "Terminator Génesis (2015)",
+      "raiting": "5.9/10"
+    },
+    {
+      "i": 8,
+      "poster_link": "/pelicula/fast-furious-8",
+      "poster": {
+        "alt": "VER Fast & Furious 8 (2017) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/5b1zDwWxoDG8p8aHoRYfzOd7Lvy.jpg"
+      },
+      "title": "Fast & Furious 8 (2017)",
+      "raiting": "6.9/10"
+    },
+    {
+      "i": 9,
+      "poster_link": "/pelicula/que-culpa-tiene-el-nino",
+      "poster": {
+        "alt": "VER ¿Qué culpa tiene el niño? (2016) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/md3iYDpi6rlrAF6iyJyzdOzyUEV.jpg"
+      },
+      "title": "¿Qué culpa tiene el niño? (2016)",
+      "raiting": "6.4/10"
+    },
+    {
+      "i": 10,
+      "poster_link": "/pelicula/los-ilusionistas",
+      "poster": {
+        "alt": "VER Los Ilusionistas (2013) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/iN3fPrPLozgPDrHO1IILh1Cx0C3.jpg"
+      },
+      "title": "Los Ilusionistas (2013)",
+      "raiting": "7.4/10"
+    },
+    {
+      "i": 11,
+      "poster_link": "/pelicula/x-men-apocalipsis",
+      "poster": {
+        "alt": "VER X-Men: Apocalipsis (2016) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/i5ET4lACwrb97sdPzmIThieasOk.jpg"
+      },
+      "title": "X-Men: Apocalipsis (2016)",
+      "raiting": "6.5/10"
+    },
+    {
+      "i": 12,
+      "poster_link": "/pelicula/buscando-a-dory",
+      "poster": {
+        "alt": "VER Buscando a Dory (2016) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/wXBwo2DxTm6wZ8Cbu02t9kzzoK4.jpg"
+      },
+      "title": "Buscando a Dory (2016)",
+      "raiting": "7/10"
+    },
+    {
+      "i": 13,
+      "poster_link": "/pelicula/el-cadaver-de-anna-fritz",
+      "poster": {
+        "alt": "VER El cadáver de Anna Fritz (2015) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/hJaC0mBzPQxlm6ZngJAhgytEtHj.jpg"
+      },
+      "title": "El cadáver de Anna Fritz (2015)",
+      "raiting": "5.9/10"
+    },
+    {
+      "i": 14,
+      "poster_link": "/pelicula/mi-abuelo-es-un-peligro",
+      "poster": {
+        "alt": "VER Mi Abuelo es un Peligro (2016) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/rb8Pfl0MGw40A8PmPnqucH8Yf1.jpg"
+      },
+      "title": "Mi Abuelo es un Peligro (2016)",
+      "raiting": "5.8/10"
+    },
+    {
+      "i": 15,
+      "poster_link": "/pelicula/intensamente",
+      "poster": {
+        "alt": "VER Intensamente (2015) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/lRHE0vzf3oYJrhbsHXjIkF4Tl5A.jpg"
+      },
+      "title": "Intensamente (2015)",
+      "raiting": "8/10"
+    },
+    {
+      "i": 16,
+      "poster_link": "/pelicula/logan",
+      "poster": {
+        "alt": "VER Logan (2017) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/x75pHBRH3UdRQtP52k8MIOLryW8.jpg"
+      },
+      "title": "Logan (2017)",
+      "raiting": "7.7/10"
+    },
+    {
+      "i": 17,
+      "poster_link": "/pelicula/rescate-suicida",
+      "poster": {
+        "alt": "VER Rescate Suicida (2015) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/1Cn5pxPi5XedW0oH0Xr6GibmmVZ.jpg"
+      },
+      "title": "Rescate Suicida (2015)",
+      "raiting": "4.4/10"
+    },
+    {
+      "i": 18,
+      "poster_link": "/pelicula/doctor-extrano",
+      "poster": {
+        "alt": "VER Doctor Extraño (2016) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/gwi5kL7HEWAOTffiA14e4SbOGra.jpg"
+      },
+      "title": "Doctor Extraño (2016)",
+      "raiting": "7.3/10"
+    },
+    {
+      "i": 19,
+      "poster_link": "/pelicula/xxx-reactivado",
+      "poster": {
+        "alt": "VER xXx: Reactivado (2017) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/hba8zREJpP1AYhaXgb2oJLQeO0K.jpg"
+      },
+      "title": "xXx: Reactivado (2017)",
+      "raiting": "5.6/10"
+    },
+    {
+      "i": 20,
+      "poster_link": "/pelicula/un-gran-dinosaurio",
+      "poster": {
+        "alt": "VER Un Gran Dinosaurio (2015) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/1WKI6PM79XjK2LVS1B4yoG3wNHw.jpg"
+      },
+      "title": "Un Gran Dinosaurio (2015)",
+      "raiting": "6.7/10"
+    },
+    {
+      "i": 21,
+      "poster_link": "/pelicula/piratas-del-caribe-la-venganza-de-salazar",
+      "poster": {
+        "alt": "VER Piratas del Caribe: La venganza de Salazar (2017) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/xbpSDU3p7YUGlu9Mr6Egg2Vweto.jpg"
+      },
+      "title": "Piratas del Caribe: La venganza de Salazar (2017)",
+      "raiting": "6.5/10"
+    },
+    {
+      "i": 22,
+      "poster_link": "/pelicula/el-cuento-de-los-cuentos",
+      "poster": {
+        "alt": "VER El cuento de los cuentos (2015) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/lPGoscoGrVDfZ5v4AZ9wnrDCxdU.jpg"
+      },
+      "title": "El cuento de los cuentos (2015)",
+      "raiting": "6.2/10"
+    },
+    {
+      "i": 23,
+      "poster_link": "/pelicula/el-renacido",
+      "poster": {
+        "alt": "VER El renacido (2015) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/k3Jh7J5GGMx1lmr7qmynRxOvOK5.jpg"
+      },
+      "title": "El renacido (2015)",
+      "raiting": "7.4/10"
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "nextPage": 2,
+    "prevPage": null,
+    "lastPage": 290
+  }
+}
+          </code>
+        </pre>
+        
       </li>
       <li class="my-2">
         <span class="badge bg-success">GET</span> <a href="/peliculas/estrenos">/peliculas/estrenos</a> para traer los posters de las peliculas estrenos. 
         <br/>Para navegar entre paginas usa el query <span class="badge bg-secondary">?page</span>. ej: <span class="badge bg-success">GET</span>  <a href="/peliculas/estrenos?page=3">/peliculas/estrenos?page=3</a>
+        <pre>
+          <code class="hjls language-json">
+{
+  "posters": [
+    {
+      "i": 0,
+      "poster_link": "/pelicula/superman-red-son",
+      "poster": {
+        "alt": "VER Superman: Red Son (2020) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/FVU9HZ87VfYMe5vIJvM3hFTG5i.jpg"
+      },
+      "title": "Superman: Red Son (2020)",
+      "raiting": "9.2/10"
+    },
+    {
+      "i": 1,
+      "poster_link": "/pelicula/a-todos-los-chicos-2-pd-todavia-te-quiero",
+      "poster": {
+        "alt": "VER A todos los chicos 2: P.D. Todavía te quiero (2020) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/maib5VlmEqp5xlN8lptnBSftp2o.jpg"
+      },
+      "title": "A todos los chicos 2: P.D. Todavía te quiero (2020)",
+      "raiting": "7.1/10"
+    },
+    {
+      "i": 2,
+      "poster_link": "/pelicula/horse-girl",
+      "poster": {
+        "alt": "VER Horse Girl (2020) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/hNQ7st9dFXUXENMcsAuVxcrIBfA.jpg"
+      },
+      "title": "Horse Girl (2020)",
+      "raiting": "5.5/10"
+    },
+    {
+      "i": 3,
+      "poster_link": "/pelicula/infierno-en-la-frontera",
+      "poster": {
+        "alt": "VER Infierno en la Frontera (2019) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/yQqMvQJ9DZV7J4WkDda5Y8yzsPw.jpg"
+      },
+      "title": "Infierno en la Frontera (2019)",
+      "raiting": "6.3/10"
+    },
+    {
+      "i": 4,
+      "poster_link": "/pelicula/un-papa-pirata",
+      "poster": {
+        "alt": "VER Un Papá Pirata (2019) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/xI47AzEQNZWNkNBUA06ws0riMAY.jpg"
+      },
+      "title": "Un Papá Pirata (2019)",
+      "raiting": "10/10"
+    },
+    {
+      "i": 5,
+      "poster_link": "/pelicula/black-and-blue",
+      "poster": {
+        "alt": "VER Black and Blue (2019) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/1cSHEKYYP8Dpi4o1iBVd4U75FYt.jpg"
+      },
+      "title": "Black and Blue (2019)",
+      "raiting": "5.9/10"
+    },
+    {
+      "i": 6,
+      "poster_link": "/pelicula/a-47-metros-2-el-terror-emerge",
+      "poster": {
+        "alt": "VER A 47 metros 2: El terror emerge (2019) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/tTdsKKEiAcvo4sm3vgIrbzg8u83.jpg"
+      },
+      "title": "A 47 metros 2: El terror emerge (2019)",
+      "raiting": "4.8/10"
+    },
+    {
+      "i": 7,
+      "poster_link": "/pelicula/huerfanos-de-brooklyn",
+      "poster": {
+        "alt": "VER Huérfanos de Brooklyn (2019) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/jjMJy5OxJHpFIaboCklDIYdcfpD.jpg"
+      },
+      "title": "Huérfanos de Brooklyn (2019)",
+      "raiting": "7.2/10"
+    },
+    {
+      "i": 8,
+      "poster_link": "/pelicula/harriet",
+      "poster": {
+        "alt": "VER Harriet (2019) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/rsUs58bDqpJJxZSOebZOMN9gzw2.jpg"
+      },
+      "title": "Harriet (2019)",
+      "raiting": "6.7/10"
+    },
+    {
+      "i": 9,
+      "poster_link": "/pelicula/nina-errante",
+      "poster": {
+        "alt": "VER Niña errante (2018) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/vpDhcazFHQWegtgRcQqhTJMIpXN.jpg"
+      },
+      "title": "Niña errante (2018)",
+      "raiting": "8.6/10"
+    },
+    {
+      "i": 10,
+      "poster_link": "/pelicula/zombieland-tiro-de-gracia",
+      "poster": {
+        "alt": "VER Zombieland: Tiro de gracia (2019) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/mIUGQ89isLNj4IRujDsXrZFIZCQ.jpg"
+      },
+      "title": "Zombieland: Tiro de gracia (2019)",
+      "raiting": "7/10"
+    },
+    {
+      "i": 11,
+      "poster_link": "/pelicula/historias-de-fantasmas2020",
+      "poster": {
+        "alt": "VER Historias de Fantasmas (2020) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/wuTwPYFoEGQG3EntpdZA8LlBBdx.jpg"
+      },
+      "title": "Historias de Fantasmas (2020)",
+      "raiting": "6.5/10"
+    },
+    {
+      "i": 12,
+      "poster_link": "/pelicula/malefica-maestra-del-mal",
+      "poster": {
+        "alt": "VER Maléfica: Maestra del mal (2019) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/vloNTScJ3w7jwNwtNGoG8DbTThv.jpg"
+      },
+      "title": "Maléfica: Maestra del mal (2019)",
+      "raiting": "7.2/10"
+    },
+    {
+      "i": 13,
+      "poster_link": "/pelicula/the-app",
+      "poster": {
+        "alt": "VER The App (2019) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/tjtwEm9foB0NnWomsP3hUiSc0nG.jpg"
+      },
+      "title": "The App (2019)",
+      "raiting": "2.9/10"
+    },
+    {
+      "i": 14,
+      "poster_link": "/pelicula/wild-rose",
+      "poster": {
+        "alt": "VER Wild Rose (2018) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/79THplH9WM7y3gRPYM4dcC0IRPw.jpg"
+      },
+      "title": "Wild Rose (2018)",
+      "raiting": "6.9/10"
+    },
+    {
+      "i": 15,
+      "poster_link": "/pelicula/los-dos-papas",
+      "poster": {
+        "alt": "VER Los dos Papas (2019) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/k6LNvmwvFC8rOYH2u3zKyw11fiX.jpg"
+      },
+      "title": "Los dos Papas (2019)",
+      "raiting": "7.6/10"
+    },
+    {
+      "i": 16,
+      "poster_link": "/pelicula/la-familia-addams",
+      "poster": {
+        "alt": "VER La familia Addams (2019) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/q1epO0eO8DWu8Vo8tPfvVlzW48T.jpg"
+      },
+      "title": "La familia Addams (2019)",
+      "raiting": "6.2/10"
+    },
+    {
+      "i": 17,
+      "poster_link": "/pelicula/proyecto-geminis",
+      "poster": {
+        "alt": "VER Proyecto Géminis (2019) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/uTALxjQU8e1lhmNjP9nnJ3t2pRU.jpg"
+      },
+      "title": "Proyecto Géminis (2019)",
+      "raiting": "5.8/10"
+    },
+    {
+      "i": 18,
+      "poster_link": "/pelicula/cold-blood-legacy",
+      "poster": {
+        "alt": "VER Cold Blood Legacy (2019) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/uGMIxhhMvQEE0mNlATXpEAG4mgl.jpg"
+      },
+      "title": "Cold Blood Legacy (2019)",
+      "raiting": "5/10"
+    },
+    {
+      "i": 19,
+      "poster_link": "/pelicula/the-aeronauts",
+      "poster": {
+        "alt": "VER The Aeronauts (2019) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/kZHnblqmTBUBgzYBIxWIz9txsEi.jpg"
+      },
+      "title": "The Aeronauts (2019)",
+      "raiting": "6.7/10"
+    },
+    {
+      "i": 20,
+      "poster_link": "/pelicula/togo",
+      "poster": {
+        "alt": "VER Togo (2019) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/wX0QD36a80hxulcizz7tyahYOF8.jpg"
+      },
+      "title": "Togo (2019)",
+      "raiting": "7.5/10"
+    },
+    {
+      "i": 21,
+      "poster_link": "/pelicula/deadly-influencer",
+      "poster": {
+        "alt": "VER Deadly Influencer (2019) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/60KbGPaPSZShftnWtCmrNZgsTgP.jpg"
+      },
+      "title": "Deadly Influencer (2019)",
+      "raiting": "6.5/10"
+    },
+    {
+      "i": 22,
+      "poster_link": "/pelicula/midsommar",
+      "poster": {
+        "alt": "VER Midsommar (2019) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/7LEI8ulZzO5gy9Ww2NVCrKmHeDZ.jpg"
+      },
+      "title": "Midsommar (2019)",
+      "raiting": "7.2/10"
+    },
+    {
+      "i": 23,
+      "poster_link": "/pelicula/after-the-wedding",
+      "poster": {
+        "alt": "VER After the Wedding (2019) Online Gratis HD",
+        "src": "https://image.tmdb.org/t/p/w300/cyFbVSajl1NGwBJdW0xOyvh9t7G.jpg"
+      },
+      "title": "After the Wedding (2019)",
+      "raiting": "6.3/10"
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "nextPage": 2,
+    "prevPage": null,
+    "lastPage": 25
+  }
+}
+          </code>
+        </pre>
       </li>
     </ul>
 
@@ -100,6 +870,74 @@
       <li class="my-2">
         usa <span class="badge bg-primary">/peliculas/:info</span> para traer la informacion de una pelicula. 
         ej: <span class="badge bg-success">GET</span> <a href="/pelicula/friends-the-reunion">/pelicula/friends-the-reunion</a>
+        <pre>
+          <code class="hljs language-json">
+{
+  "title": "Friends: The Reunion (2021)",
+  "poster_img": "https://image.tmdb.org/t/p/w300/bT3c4TSOP8vBmMoXZRDPTII6eDa.jpg",
+  "descripcion": "El reparto de la mítica serie \"Friends\" -que duró 10 temporadas (1994-2004)- se reúne para un especial en la nueva plataforma HBO Max en la que recuerdan numerosas anécdotas del rodaje, reciben a celebridades y a algunos invitados que pasaron por la serie, y reflexionan sobre la importancia para ellos de la serie y las consecuencias de su enorme fama sobre sus vidas..",
+  "ano": {
+    "text": "2021",
+    "href": "/year/2021",
+    "title": "Películas del Año 2021"
+  },
+  "data": [
+    {
+      "name": "Actores:",
+      "content": []
+    },
+    {
+      "name": "Director:",
+      "content": []
+    },
+    {
+      "name": "Escritor:",
+      "content": []
+    },
+    {
+      "name": "Pais:",
+      "content": [
+        {
+          "title": "Películas del País USA",
+          "href": "/pais/usa",
+          "text": "USA"
+        }
+      ]
+    },
+    {
+      "name": "Fecha de\nestreno:",
+      "content": [
+        {
+          "fecha": "2021-05-27"
+        }
+      ]
+    }
+  ],
+  "generos": [
+    {
+      "name": "\nDocumental",
+      "href": "/generos/documental",
+      "title": "Películas del Genero: Documental"
+    },
+    {
+      "name": "\nComedia",
+      "href": "/generos/comedia",
+      "title": "Películas del Genero: Comedia"
+    },
+    {
+      "name": "\nPelícula de TV",
+      "href": "/generos/pelicula-de-tv",
+      "title": "Películas del Genero: Película de TV"
+    },
+    {
+      "name": "\nDrama",
+      "href": "/generos/drama",
+      "title": "Películas del Genero: Drama"
+    }
+  ]
+}
+          </code>
+        </pre>
       </li>
     </ul>
 
@@ -107,6 +945,21 @@
     <ul>
       <li class="my-2">
         usa <span class="badge bg-primary">/peliculas/rep/:info</span> para traer todos los reproductores de una pelicula. ej: <span class="badge bg-success">GET</span> <a href="/pelicula/rep/friends-the-reunion">/pelicula/rep/friends-the-reunion</a>
+      <pre>
+        <code class="hjls language-json">
+{
+  "reproductores": [
+    "https://pelisplushd.net/fembed.php?url=kyz5ni3grgn7r0e",
+    "https://pelistop.co/embed-71x3dp0n6yoo.html",
+    "https://jawcloud.co/embed-p4lyq3hrdnq6.html",
+    "https://player.moovies.in/f/l8m9meXrFmBh",
+    "https://dood.to/e/jm5c063kd3vd",
+    "https://upstream.to/embed-ldn6nlm31g83.html",
+    "https://uqload.com/embed-yvsspi7nllj9.html"
+  ]
+}
+        </code>
+      </pre>
       </li>
     </ul>
 
@@ -150,10 +1003,10 @@
         <br/>ej: <span class="badge bg-success">GET</span> <a href="/serie/the-flash/temporada/2/capitulo/16">/serie/the-flash/temporada/2/capitulo/16</a>
       </li>
     </ul>
-
+    
     <hr id="animes">
     <h2>Animes</h2>
-
+    
     <h5>Obtener los Posters de Animes<br/></h5>
     <ul>
       <li class="my-2">
@@ -183,7 +1036,7 @@
         usa <span class="badge bg-primary">/anime/temporadas/:info</span> para traer todas las temporadas de una anime. ej: <span class="badge bg-success">GET</span> <a href="/anime/temporadas/trese">/anime/temporadas/trese</a>
       </li>
     </ul>
-
+    
     <h5>Obtener reproductores de un Anime</h5>
     <ul>
       <li class="my-2">
@@ -201,7 +1054,7 @@
         <br/>Para navegar entre paginas usa el query <span class="badge bg-secondary">?page</span> ej: <span class="badge bg-success">GET</span>  <a href="/search?s=terror&page=3">/search?s=terror&page=3</a>
       </li>
     </ul>
-
+    
     <hr id="generos">
     <h2>Generos</h2>
     <h5>Traer una lista basica de Generos</h5>
@@ -210,7 +1063,7 @@
         <span class="badge bg-success">GET</span> <a href="/generos">/generos</a> para traer una lista basica de generos
       </li>
     </ul>
-
+    
     <h5>Trear todos los posters de un Genero</h5>
     <ul>
       <li class="my-2">
@@ -224,21 +1077,21 @@
         <span class="badge bg-primary">/generos/:genero/peliculas</span> para traer todos los posters de peliculas de un genero. ej <span class="badge bg-success">GET</span> <a href="/generos/accion/peliculas">/generos/accion/peliculas</a>
       </li>
     </ul>
-
+    
     <h5>Trear todos los posters de series de un Genero</h5>
     <ul>
       <li class="my-2">
         <span class="badge bg-primary">/generos/:genero/series</span> para traer todos los posters de series de un genero. ej <span class="badge bg-success">GET</span> <a href="/generos/accion/series">/generos/accion/series</a>
       </li>
     </ul>
-
+    
     <h5>Trear todos los posters de animes de un Genero</h5>
     <ul>
       <li class="my-2">
         <span class="badge bg-primary">/generos/:genero/animes</span> para traer todos los posters de animes de un genero. ej <span class="badge bg-success">GET</span> <a href="/generos/accion/animes">/generos/accion/animes</a>
       </li>
     </ul>
-
+    
     <hr id="anos">
     <h2>Años</h2>
     <h5>Traer una lista de todos los Años</h5>
@@ -247,21 +1100,21 @@
         <span class="badge bg-success">GET</span> <a href="/years">/years</a> para traer una lista de todos los años que contienen peliculas, series y animes
       </li>
     </ul>
-
+    
     <h5>Trear todos los posters de un Año</h5>
     <ul>
       <li class="my-2">
         <span class="badge bg-primary">/year/:year</span> para traer todos los posters de un año, de todos los tipos (peliculas, series y animes). ej <span class="badge bg-success">GET</span> <a href="/year/2021">/year/2021</a>
       </li>
     </ul>
-
+    
     <h5>Trear todos los posters de peliculas de un Año</h5>
     <ul>
       <li class="my-2">
         <span class="badge bg-primary">/year/:year/peliculas</span> para traer todos los posters de peliculas de un año. ej <span class="badge bg-success">GET</span> <a href="/year/2021/peliculas">/year/2021/peliculas</a>
       </li>
     </ul>
-
+    
     <h5>Trear todos los posters de series de un Año</h5>
     <ul>
       <li class="my-2">
@@ -275,7 +1128,7 @@
         <span class="badge bg-primary">/year/:year/animes</span> para traer todos los posters de animes de un año. ej <span class="badge bg-success">GET</span> <a href="/year/2021/animes">/year/2021/animes</a>
       </li>
     </ul>
-
+    
     <hr id="estrenos">
     <h2>Estrenos</h2>
     <h5>Traer una lista de las ultimas peliculas, series y animes subidos del ultimo año</h5>
@@ -284,12 +1137,16 @@
         <span class="badge bg-success">GET</span> <a href="/estrenos">/estrenos</a> traer una lista de posters de peliculas, series y animes subidos este ultimo año.
       </li>
     </ul>
-
+    
   </div>
-
+  
   <a class="top hide" id="topButton" href="#top">
     <img src="/arrow-top.svg">
   </a>
+
+  <script src="/highlight/highlight.min.js"></script>
+
+  <script>hljs.highlightAll();</script>
 
   <script>
     const topButton = document.getElementById('topButton')
