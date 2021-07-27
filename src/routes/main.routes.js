@@ -17,8 +17,9 @@ const {
   getPais,
   getActor,
   getDirector,
-  getEscritor
-} = require('../controllers/more.controller')
+  getEscritor,
+  getLastUploaded
+} = require('../controllers/more.controller');
 
 router.get('/search', search);
 
@@ -51,5 +52,7 @@ router.get('/actor/:actor', getActor);
 router.get('/director/:director', getDirector);
 
 router.get('/escritor/:escritor', getEscritor);
+
+router.get('/last', getLastUploaded);
 
 module.exports = router;

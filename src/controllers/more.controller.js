@@ -3,7 +3,8 @@ const {
   searchPoster,
   reqEstrenos,
   reqGenders,
-  reqYears
+  reqYears,
+  reqLastUploaded
 } = require('../helpers/more.helper');
 
 function response(data, req, res) {
@@ -107,6 +108,11 @@ mainCtrl.getDirector = async (req, res) => {
 mainCtrl.getEscritor = async (req, res) => {
   const page = req.query.page ? `?page=${req.query.page}` : '';
   const data = await searchPoster(`/escritor/${req.params.escritor}${page}`);
+  response(data, req, res);
+}
+
+mainCtrl.getLastUploaded = async (req, res) => {
+  const data = await reqLastUploaded();
   response(data, req, res);
 }
 

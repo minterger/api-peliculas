@@ -117,7 +117,7 @@ async function reqYears(uri) {
     }
     const $ = cheerio.load(html.data);
       
-    const array = []
+    const array = [];
     $('.nav-item .dropdown-menu').eq(4).find('a').each((i, el) => {
       const $el = $(el);
       const object = {
@@ -134,9 +134,45 @@ async function reqYears(uri) {
   }
 }
 
+async function reqLastUploaded() {
+  try {
+    const html = await fetchurl();
+    if (html.status !== 200) {
+      return {
+        status: html.status,
+        statusText: html.statusText
+      }
+    }
+    const $ = cheerio.load(html.data);
+
+    const array = [];
+    $('.main-ca-content .item').each((i, el) => {
+      const $el = $(el);
+      const object = {
+        i,
+        poster_link: $el.find('a').attr('href'),
+        poster_link_data_title: $el.find('a').attr('data-title'),
+        poster: $el.find('img').attr('src'),
+        poster_alt: $el.find('img').attr('alt'),
+        title: $el.find('p').text()
+      }
+      array.push(object);
+    });
+    
+    console.log(array);
+
+    return array;
+
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+}
+
 module.exports = {
   searchPoster,
   reqEstrenos,
   reqGenders,
-  reqYears
+  reqYears,
+  reqLastUploaded
 }
