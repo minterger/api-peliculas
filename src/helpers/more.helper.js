@@ -150,7 +150,7 @@ async function reqLastUploaded() {
       const $el = $(el);
       const object = {
         i,
-        poster_link: $el.find('a').attr('href'),
+        poster_link: $el.find('a').attr('href').replace(/\w{4,5}\W{3}(\w+\.?){1,3}/gi, ''),
         poster_link_data_title: $el.find('a').attr('data-title'),
         poster: $el.find('img').attr('src'),
         poster_alt: $el.find('img').attr('alt'),
@@ -159,8 +159,6 @@ async function reqLastUploaded() {
       array.push(object);
     });
     
-    console.log(array);
-
     return array;
 
   } catch (error) {

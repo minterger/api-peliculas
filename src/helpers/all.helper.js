@@ -64,15 +64,16 @@ async function getInfo(uri) {
     const $ = cheerio.load(html.data);
     
     const object = {};
-    object.title = $('.m-b-5').html().replace(/^\W/g, '');
+    object.title = $('.m-b-5').text();
     object.poster_img = $('.img-fluid.d-block.mx-auto.m-b-30').attr('src');
     object.descripcion = $('.text-large').html().replace(/^\W/g, '');
     object.raiting = $('.font-size-18.text-info.text-semibold.ion-md-star').text().replace(/^\W/g, '')
+    object.descripcion = $('.text-large').html()
     object.ano = {
       text: $('.font-size-18.text-info.text-semibold').html().trim(),
       href: $('.p-v-20.p-r-15.text-center').find('a').attr('href').replace(/\w{4,5}\W{3}(\w+\.?){1,3}/gi, ''),
       title: $('.p-v-20.p-r-15.text-center').find('a').attr('title')
-    }
+    };
     object.data = [];
     object.generos = [];
     $('.sectionDetail.mb15').each((i, el) => {
