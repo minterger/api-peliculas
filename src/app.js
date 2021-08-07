@@ -1,7 +1,8 @@
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
-const cors = require('cors')
+const cors = require('cors');
+const helmet = require('helmet');
 const app = express();
 
 // settings
@@ -12,8 +13,13 @@ app.set(express.json());
 app.set(express.urlencoded({extended: false}));
 app.use(morgan('dev'));
 
+app.use(helmet());
 // cors support
-app.use(cors());
+const corsOptions = {
+  origin: 'https://pelislatino.ga',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+app.use(cors(corsOptions));
 
 // routes
 app.use(require('./routes/main.routes'));
