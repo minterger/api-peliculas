@@ -92,7 +92,7 @@
         <span class="badge bg-success">GET</span> <a href="/peliculas">/peliculas</a> obtiene los posters de las peliculas. 
         <br/>Para navegar entre paginas usa el query <span class="badge bg-secondary">?page</span>. ej: <span class="badge bg-success">GET</span>  <a href="/peliculas?page=3">/peliculas?page=3</a>
         <pre>
-          <code class="hjls language-json">
+          <code class="hljs language-json">
 {
   "posters": [
     {
@@ -609,7 +609,7 @@
         <span class="badge bg-success">GET</span> <a href="/peliculas/estrenos">/peliculas/estrenos</a> para traer los posters de las peliculas estrenos. 
         <br/>Para navegar entre paginas usa el query <span class="badge bg-secondary">?page</span>. ej: <span class="badge bg-success">GET</span>  <a href="/peliculas/estrenos?page=3">/peliculas/estrenos?page=3</a>
         <pre>
-          <code class="hjls language-json">
+          <code class="hljs language-json">
 {
   "posters": [
     {
@@ -946,7 +946,7 @@
       <li class="my-2">
         usa <span class="badge bg-primary">/peliculas/rep/:info</span> para traer todos los reproductores de una pelicula. ej: <span class="badge bg-success">GET</span> <a href="/pelicula/rep/friends-the-reunion">/pelicula/rep/friends-the-reunion</a>
       <pre>
-        <code class="hjls language-json">
+        <code class="hljs language-json">
 {
   "reproductores": [
     "https://pelisplushd.net/fembed.php?url=kyz5ni3grgn7r0e",
@@ -1146,24 +1146,7 @@
 
   <script src="/highlight/highlight.min.js"></script>
 
-  <script>hljs.highlightAll();</script>
+  <script src="/main.js"></script>
 
-  <script>
-    const topButton = document.getElementById('topButton')
-
-    function scrollSpy(scrollY) {
-      if (scrollY < 120) {
-        topButton.classList.add('hide')
-      } else { 
-        topButton.classList.remove('hide')
-      }
-    }
-    
-    scrollSpy(window.scrollY)
-
-    window.addEventListener('scroll', (e) => {
-      scrollSpy(window.scrollY)
-    })
-  </script>
 </body>
 </html>
