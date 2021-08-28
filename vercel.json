@@ -1,4 +1,18 @@
 {
-  "routes": [{ "source": "/(.*)", "destination": "/src/app.js" }]
+  "version": 2,
+  "env": {
+    "YEAR_ESTRENO": "2021"
+  },
+  "builds": [
+    {
+      "src": "/src/app.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/src/app.js"
+    }
+  ]
 }
-
