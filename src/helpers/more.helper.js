@@ -1,56 +1,56 @@
-const cheerio = require('cheerio');
-const fetchurl = require('./url/fetch')
+const cheerio = require("cheerio");
+const fetchurl = require("./url/fetch");
 
-async function searchPoster (uri) {
+async function searchPoster(uri) {
   try {
     const html = await fetchurl(uri);
     if (html.status !== 200) {
       return {
         status: html.status,
-        statusText: html.statusText
-      }
+        statusText: html.statusText,
+      };
     }
     const $ = cheerio.load(html.data);
-      
+
     let array = [];
-      
-    $('.Posters-link').each((i,el) => {
+
+    $(".Posters-link").each((i, el) => {
       const data = {
         i,
         poster_link: $(el)
-          .attr('href')
-          .replace(/\w{4,5}\W{3}(\w+\.?){1,3}/gi, ''),
-        poster: $(el).find('img')
-          .removeAttr('class')
-          .removeAttr('srcset')
-          .removeAttr('data-srcset')
+          .attr("href")
+          .replace(/\w{4,5}\W{3}(\w+\.?){1,3}/gi, ""),
+        poster: $(el)
+          .find("img")
+          .removeAttr("class")
+          .removeAttr("srcset")
+          .removeAttr("data-srcset")
           .attr(),
-        title: $(el).find('p').text(),
-        raiting: $(el).find('.rating').text(),
-        type: $(el).find('.centrado').text()
+        title: $(el).find("p").text(),
+        raiting: $(el).find(".rating").text(),
+        type: $(el).find(".centrado").text(),
       };
       array.push(data);
     });
 
     // array = array.filter(function(data) {
-    //   return data.type !== ' Anime\n'; 
+    //   return data.type !== ' Anime\n';
     // });
 
-    const page = parseInt($('.page-item.active .page-link').text());
-    const lastPage = parseInt($('.page-item .page-link').eq(-2).text());
+    const page = parseInt($(".page-item.active .page-link").text());
+    const lastPage = parseInt($(".page-item .page-link").eq(-2).text());
 
-    const pagination =  {
+    const pagination = {
       page,
       nextPage: page === lastPage ? null : page + 1,
       prevPage: page === 1 ? null : page - 1,
       lastPage,
     };
-    
+
     return {
       posters: array,
-      pagination
+      pagination,
     };
-    
   } catch (error) {
     console.error(error);
     return error;
@@ -63,15 +63,14 @@ async function reqEstrenos(uri) {
     if (html.status !== 200) {
       return {
         status: html.status,
-        statusText: html.statusText
-      }
+        statusText: html.statusText,
+      };
     }
     const $ = cheerio.load(html.data);
 
-    const href = $('.nav-item .dropdown-menu').eq(4).find('a').attr('href')
-    
-    return await searchPoster(href);
+    const href = $(".nav-item .dropdown-menu").eq(4).find("a").attr("href");
 
+    return await searchPoster(href);
   } catch (error) {
     console.error(error);
     return error;
@@ -84,20 +83,23 @@ async function reqGenders(uri) {
     if (html.status !== 200) {
       return {
         status: html.status,
-        statusText: html.statusText
-      }
+        statusText: html.statusText,
+      };
     }
     const $ = cheerio.load(html.data);
-      
-    const array = []
-    $('.nav-item .dropdown-menu').eq(3).find('a').each((i, el) => {
-      const $el = $(el);
-      const object = {
-        name: $el.text(),
-        href: $el.attr('href')
-      };
-      array.push(object);
-    });
+
+    const array = [];
+    $(".nav-item .dropdown-menu")
+      .eq(3)
+      .find("a")
+      .each((i, el) => {
+        const $el = $(el);
+        const object = {
+          name: $el.text(),
+          href: $el.attr("href"),
+        };
+        array.push(object);
+      });
 
     return array;
   } catch (error) {
@@ -112,20 +114,23 @@ async function reqYears(uri) {
     if (html.status !== 200) {
       return {
         status: html.status,
-        statusText: html.statusText
-      }
+        statusText: html.statusText,
+      };
     }
     const $ = cheerio.load(html.data);
-      
+
     const array = [];
-    $('.nav-item .dropdown-menu').eq(4).find('a').each((i, el) => {
-      const $el = $(el);
-      const object = {
-        name: $el.text(),
-        href: $el.attr('href')
-      };
-      array.push(object);
-    });
+    $(".nav-item .dropdown-menu")
+      .eq(4)
+      .find("a")
+      .each((i, el) => {
+        const $el = $(el);
+        const object = {
+          name: $el.text(),
+          href: $el.attr("href"),
+        };
+        array.push(object);
+      });
 
     return array;
   } catch (error) {
@@ -140,27 +145,29 @@ async function reqLastUploaded() {
     if (html.status !== 200) {
       return {
         status: html.status,
-        statusText: html.statusText
-      }
+        statusText: html.statusText,
+      };
     }
     const $ = cheerio.load(html.data);
 
     const array = [];
-    $('.main-ca-content .item').each((i, el) => {
+    $(".main-ca-content .item").each((i, el) => {
       const $el = $(el);
       const object = {
         i,
-        poster_link: $el.find('a').attr('href').replace(/\w{4,5}\W{3}(\w+\.?){1,3}/gi, ''),
-        poster_link_data_title: $el.find('a').attr('data-title'),
-        poster: $el.find('img').attr('src'),
-        poster_alt: $el.find('img').attr('alt'),
-        title: $el.find('p').text()
-      }
+        poster_link: $el
+          .find("a")
+          .attr("href")
+          .replace(/\w{4,5}\W{3}(\w+\.?){1,3}/gi, ""),
+        poster_link_data_title: $el.find("a").attr("data-title"),
+        poster: $el.find("img").attr("src"),
+        poster_alt: $el.find("img").attr("alt"),
+        title: $el.find("p").text(),
+      };
       array.push(object);
     });
-    
-    return array;
 
+    return array;
   } catch (error) {
     console.error(error);
     return error;
@@ -172,5 +179,5 @@ module.exports = {
   reqEstrenos,
   reqGenders,
   reqYears,
-  reqLastUploaded
-}
+  reqLastUploaded,
+};
