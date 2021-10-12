@@ -133,6 +133,14 @@ mainCtrl.getGenerosAnimes = async (req, res) => {
 };
 
 mainCtrl.years = async (req, res) => {
+  const date = getDate()
+  let reply = await redisGet(req.originalUrl)
+  reply = JSON.parse(reply)
+  if (reply) {
+    if (reply.date == date) {
+      return res.json(reply.data)
+    }
+  }
   const data = await reqYears("");
   response(data, req, res, date);
 };
