@@ -25,9 +25,7 @@ mainCtrl.renderSeries = async (req, res) => {
     res.json(reply);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await getPosters(`/series${page}`);
-    if (!data.status) {
-      await redisSet(req.originalUrl, JSON.stringify(data));
-    }
+    await redisSet(req.originalUrl, JSON.stringify(data));
     return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
@@ -40,9 +38,7 @@ mainCtrl.seriesEstrenos = async (req, res) => {
   if (reply) {
     reply = JSON.parse(reply);
     res.json(reply);
-    if (!data.status) {
-      await redisSet(req.originalUrl, JSON.stringify(data));
-    }
+    await redisSet(req.originalUrl, JSON.stringify(data));
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await getPosters(`/series/estrenos${page}`);
     return;
@@ -59,9 +55,7 @@ mainCtrl.seriesPopulares = async (req, res) => {
     res.json(reply);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await getPosters(`/series/populares${page}`);
-    if (!data.status) {
-      await redisSet(req.originalUrl, JSON.stringify(data));
-    }
+    await redisSet(req.originalUrl, JSON.stringify(data));
     return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
@@ -75,9 +69,7 @@ mainCtrl.getInfoSerie = async (req, res) => {
     reply = JSON.parse(reply);
     res.json(reply);
     const data = await getInfo(`/serie/${req.params.serie}`);
-    if (!data.status) {
-      await redisSet(req.originalUrl, JSON.stringify(data));
-    }
+    await redisSet(req.originalUrl, JSON.stringify(data));
     return;
   }
   const data = await getInfo(`/serie/${req.params.serie}`);
@@ -90,9 +82,7 @@ mainCtrl.reqSeasons = async (req, res) => {
     reply = JSON.parse(reply);
     res.json(reply);
     const data = await reqSeasons(`/serie/${req.params.serie}`);
-    if (!data.status) {
-      await redisSet(req.originalUrl, JSON.stringify(data));
-    }
+    await redisSet(req.originalUrl, JSON.stringify(data));
     return;
   }
   const data = await reqSeasons(`/serie/${req.params.serie}`);
@@ -107,9 +97,7 @@ mainCtrl.repSeries = async (req, res) => {
     const data = await reqRepro(
       `/serie/${req.params.serie}/temporada/${req.params.temp}/capitulo/${req.params.cap}`
     );
-    if (!data.status) {
-      await redisSet(req.originalUrl, JSON.stringify(data));
-    }
+    await redisSet(req.originalUrl, JSON.stringify(data));
     return;
   }
   const data = await reqRepro(
