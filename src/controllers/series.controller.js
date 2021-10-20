@@ -39,10 +39,10 @@ mainCtrl.seriesEstrenos = async (req, res) => {
   if (reply) {
     reply = JSON.parse(reply);
     res.json(reply);
-    await redisSet(req.originalUrl, JSON.stringify(data));
     const page = req.query.page ? `?page=${req.query.page}` : "";
-    if (data.status) return;
     const data = await getPosters(`/series/estrenos${page}`);
+    if (data.status) return;
+    await redisSet(req.originalUrl, JSON.stringify(data));
     return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
@@ -102,7 +102,7 @@ mainCtrl.repSeries = async (req, res) => {
     const data = await reqRepro(
       `/serie/${req.params.serie}/temporada/${req.params.temp}/capitulo/${req.params.cap}`
     );
-      if (data.status) return;
+    if (data.status) return;
     await redisSet(req.originalUrl, JSON.stringify(data));
     return;
   }
