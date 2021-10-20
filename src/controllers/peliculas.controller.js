@@ -20,7 +20,9 @@ mainCtrl.renderPeliculas = async (req, res) => {
     res.json(reply);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await getPosters(`/peliculas${page}`);
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    if (!data.status) {
+      await redisSet(req.originalUrl, JSON.stringify(data));
+    }
     return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
@@ -35,7 +37,9 @@ mainCtrl.peliculasEstrenos = async (req, res) => {
     res.json(reply);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await getPosters(`/peliculas/estrenos${page}`);
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    if (!data.status) {
+      await redisSet(req.originalUrl, JSON.stringify(data));
+    }
     return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
@@ -50,7 +54,9 @@ mainCtrl.peliculasPopulares = async (req, res) => {
     res.json(reply);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await getPosters(`/peliculas/populares${page}`);
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    if (!data.status) {
+      await redisSet(req.originalUrl, JSON.stringify(data));
+    }
     return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
@@ -64,7 +70,9 @@ mainCtrl.getInfoPelicula = async (req, res) => {
     reply = JSON.parse(reply);
     res.json(reply);
     const data = await getInfo(`/pelicula/${req.params.pelicula}`);
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    if (!data.status) {
+      await redisSet(req.originalUrl, JSON.stringify(data));
+    }
     return;
   }
   const data = await getInfo(`/pelicula/${req.params.pelicula}`);
@@ -77,7 +85,9 @@ mainCtrl.repPeliculas = async (req, res) => {
     reply = JSON.parse(reply);
     res.json(reply);
     const data = await reqRepro(`/pelicula/${req.params.pelicula}`);
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    if (!data.status) {
+      await redisSet(req.originalUrl, JSON.stringify(data));
+    }
     return;
   }
   const data = await reqRepro(`/pelicula/${req.params.pelicula}`);

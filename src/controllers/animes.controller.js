@@ -25,7 +25,9 @@ mainCtrl.renderAnimes = async (req, res) => {
     res.json(reply);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await getPosters(`/animes${page}`);
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    if (!data.status) {
+      await redisSet(req.originalUrl, JSON.stringify(data));
+    }
     return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
@@ -40,7 +42,9 @@ mainCtrl.animesEstrenos = async (req, res) => {
     res.json(reply);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await getPosters(`/animes/estrenos${page}`);
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    if (!data.status) {
+      await redisSet(req.originalUrl, JSON.stringify(data));
+    }
     return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
@@ -55,7 +59,9 @@ mainCtrl.animesPopulares = async (req, res) => {
     res.json(reply);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await getPosters(`/animes/populares${page}`);
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    if (!data.status) {
+      await redisSet(req.originalUrl, JSON.stringify(data));
+    }
     return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
@@ -69,7 +75,9 @@ mainCtrl.getInfoAnime = async (req, res) => {
     reply = JSON.parse(reply);
     res.json(reply);
     const data = await getInfo(`/anime/${req.params.anime}`);
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    if (!data.status) {
+      await redisSet(req.originalUrl, JSON.stringify(data));
+    }
     return;
   }
   const data = await getInfo(`/anime/${req.params.anime}`);
@@ -82,7 +90,9 @@ mainCtrl.reqSeasons = async (req, res) => {
     reply = JSON.parse(reply);
     res.json(reply);
     const data = await reqSeasons(`/anime/${req.params.anime}`);
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    if (!data.status) {
+      await redisSet(req.originalUrl, JSON.stringify(data));
+    }
     return;
   }
   const data = await reqSeasons(`/anime/${req.params.anime}`);
@@ -97,7 +107,9 @@ mainCtrl.repAnime = async (req, res) => {
     const data = await reqRepro(
       `/anime/${req.params.anime}/temporada/${req.params.temp}/capitulo/${req.params.cap}`
     );
-    await redisSet(req.originalUrl, JSON.stringify(data));
+      if (!data.status) {
+        await redisSet(req.originalUrl, JSON.stringify(data));
+      }
     return;
   }
   const data = await reqRepro(

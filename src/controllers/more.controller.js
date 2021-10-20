@@ -26,7 +26,9 @@ mainCtrl.search = async (req, res) => {
     res.json(reply);
     const page = req.query.page ? `&page=${req.query.page}` : "";
     const data = await searchPoster(`/search?s=${req.query.s}${page}`);
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    if (!data.status) {
+      await redisSet(req.originalUrl, JSON.stringify(data));
+    }
     return;
   }
   const page = req.query.page ? `&page=${req.query.page}` : "";
@@ -40,7 +42,9 @@ mainCtrl.getEstrenos = async (req, res) => {
     reply = JSON.parse(reply);
     res.json(reply);
     const data = await searchPoster(`/year/${process.env.YEAR_ESTRENO}`);
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    if (!data.status) {
+      await redisSet(req.originalUrl, JSON.stringify(data));
+    }
     return;
   }
   // const data = await reqEstrenos('');
@@ -54,7 +58,9 @@ mainCtrl.generos = async (req, res) => {
     reply = JSON.parse(reply);
     res.json(reply);
     const data = await reqGenders("");
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    if (!data.status) {
+      await redisSet(req.originalUrl, JSON.stringify(data));
+    }
     return;
   }
   const data = await reqGenders("");
@@ -68,7 +74,9 @@ mainCtrl.getGeneros = async (req, res) => {
     res.json(reply);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await searchPoster(`/generos/${req.params.genero}${page}`);
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    if (!data.status) {
+      await redisSet(req.originalUrl, JSON.stringify(data));
+    }
     return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
@@ -85,7 +93,9 @@ mainCtrl.getGenerosPeliculas = async (req, res) => {
     const data = await searchPoster(
       `/generos/${req.params.genero}/peliculas${page}`
     );
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    if (!data.status) {
+      await redisSet(req.originalUrl, JSON.stringify(data));
+    }
     return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
@@ -104,7 +114,9 @@ mainCtrl.getGenerosSeries = async (req, res) => {
     const data = await searchPoster(
       `/generos/${req.params.genero}/series${page}`
     );
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    if (!data.status) {
+      await redisSet(req.originalUrl, JSON.stringify(data));
+    }
     return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
@@ -123,7 +135,9 @@ mainCtrl.getGenerosAnimes = async (req, res) => {
     const data = await searchPoster(
       `/generos/${req.params.genero}/animes${page}`
     );
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    if (!data.status) {
+      await redisSet(req.originalUrl, JSON.stringify(data));
+    }
     return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
@@ -139,7 +153,9 @@ mainCtrl.years = async (req, res) => {
     reply = JSON.parse(reply);
     res.json(reply);
     const data = await reqYears("");
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    if (!data.status) {
+      await redisSet(req.originalUrl, JSON.stringify(data));
+    }
     return;
   }
   const data = await reqYears("");
@@ -153,7 +169,9 @@ mainCtrl.getYear = async (req, res) => {
     res.json(reply);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await searchPoster(`/year/${req.params.year}${page}`);
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    if (!data.status) {
+      await redisSet(req.originalUrl, JSON.stringify(data));
+    }
     return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
@@ -170,7 +188,9 @@ mainCtrl.getYearPeliculas = async (req, res) => {
     const data = await searchPoster(
       `/year/${req.params.year}/peliculas${page}`
     );
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    if (!data.status) {
+      await redisSet(req.originalUrl, JSON.stringify(data));
+    }
     return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
@@ -185,7 +205,9 @@ mainCtrl.getYearSeries = async (req, res) => {
     res.json(reply);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await searchPoster(`/year/${req.params.year}/series${page}`);
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    if (!data.status) {
+      await redisSet(req.originalUrl, JSON.stringify(data));
+    }
     return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
@@ -200,7 +222,9 @@ mainCtrl.getYearAnimes = async (req, res) => {
     res.json(reply);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await searchPoster(`/year/${req.params.year}/animes${page}`);
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    if (!data.status) {
+      await redisSet(req.originalUrl, JSON.stringify(data));
+    }
     return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
@@ -215,7 +239,9 @@ mainCtrl.getPais = async (req, res) => {
     res.json(reply);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await searchPoster(`/pais/${req.params.pais}${page}`);
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    if (!data.status) {
+      await redisSet(req.originalUrl, JSON.stringify(data));
+    }
     return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
@@ -230,7 +256,9 @@ mainCtrl.getActor = async (req, res) => {
     res.json(reply);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await searchPoster(`/actor/${req.params.actor}${page}`);
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    if (!data.status) {
+      await redisSet(req.originalUrl, JSON.stringify(data));
+    }
     return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
@@ -245,7 +273,9 @@ mainCtrl.getDirector = async (req, res) => {
     res.json(reply);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await searchPoster(`/director/${req.params.director}${page}`);
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    if (!data.status) {
+      await redisSet(req.originalUrl, JSON.stringify(data));
+    }
     return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
@@ -260,7 +290,9 @@ mainCtrl.getEscritor = async (req, res) => {
     res.json(reply);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await searchPoster(`/escritor/${req.params.escritor}${page}`);
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    if (!data.status) {
+      await redisSet(req.originalUrl, JSON.stringify(data));
+    }
     return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
@@ -274,7 +306,9 @@ mainCtrl.getLastUploaded = async (req, res) => {
     reply = JSON.parse(reply);
     res.json(reply);
     const data = await reqLastUploaded();
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    if (!data.status) {
+      await redisSet(req.originalUrl, JSON.stringify(data));
+    }
     return;
   }
   const data = await reqLastUploaded();
