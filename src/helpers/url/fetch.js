@@ -6,7 +6,6 @@ async function fetchurl(param) {
     const res = await axios.get(`https://pelisplushd.net${uri}`);
     return res;
   } catch (error) {
-    log
     if (error.response) return error.response;
     return {status: 500, statusText: 'error interno'}
   }
