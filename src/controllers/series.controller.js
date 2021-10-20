@@ -41,6 +41,7 @@ mainCtrl.seriesEstrenos = async (req, res) => {
     res.json(reply);
     await redisSet(req.originalUrl, JSON.stringify(data));
     const page = req.query.page ? `?page=${req.query.page}` : "";
+    if (data.status) return;
     const data = await getPosters(`/series/estrenos${page}`);
     return;
   }
