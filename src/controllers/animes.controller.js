@@ -25,6 +25,7 @@ mainCtrl.renderAnimes = async (req, res) => {
     res.json(reply);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await getPosters(`/animes${page}`);
+    if (data.status) return;
     await redisSet(req.originalUrl, JSON.stringify(data));
     return;
   }
@@ -40,6 +41,7 @@ mainCtrl.animesEstrenos = async (req, res) => {
     res.json(reply);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await getPosters(`/animes/estrenos${page}`);
+    if (data.status) return;
     await redisSet(req.originalUrl, JSON.stringify(data));
     return;
   }
@@ -55,6 +57,7 @@ mainCtrl.animesPopulares = async (req, res) => {
     res.json(reply);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await getPosters(`/animes/populares${page}`);
+    if (data.status) return;
     await redisSet(req.originalUrl, JSON.stringify(data));
     return;
   }
@@ -69,6 +72,7 @@ mainCtrl.getInfoAnime = async (req, res) => {
     reply = JSON.parse(reply);
     res.json(reply);
     const data = await getInfo(`/anime/${req.params.anime}`);
+    if (data.status) return;
     await redisSet(req.originalUrl, JSON.stringify(data));
     return;
   }
@@ -82,6 +86,7 @@ mainCtrl.reqSeasons = async (req, res) => {
     reply = JSON.parse(reply);
     res.json(reply);
     const data = await reqSeasons(`/anime/${req.params.anime}`);
+    if (data.status) return;
     await redisSet(req.originalUrl, JSON.stringify(data));
     return;
   }
@@ -97,6 +102,7 @@ mainCtrl.repAnime = async (req, res) => {
     const data = await reqRepro(
       `/anime/${req.params.anime}/temporada/${req.params.temp}/capitulo/${req.params.cap}`
     );
+    if (data.status) return;
     await redisSet(req.originalUrl, JSON.stringify(data));
     return;
   }
