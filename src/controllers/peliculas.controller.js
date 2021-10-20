@@ -15,8 +15,8 @@ const response = async (data, req, res) => {
 
 mainCtrl.renderPeliculas = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  reply = JSON.parse(reply);
   if (reply) {
+    reply = JSON.parse(reply);
     res.json(reply);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await getPosters(`/peliculas${page}`);
@@ -30,8 +30,8 @@ mainCtrl.renderPeliculas = async (req, res) => {
 
 mainCtrl.peliculasEstrenos = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  reply = JSON.parse(reply);
   if (reply) {
+    reply = JSON.parse(reply);
     res.json(reply);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await getPosters(`/peliculas/estrenos${page}`);
@@ -45,8 +45,8 @@ mainCtrl.peliculasEstrenos = async (req, res) => {
 
 mainCtrl.peliculasPopulares = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  reply = JSON.parse(reply);
   if (reply) {
+    reply = JSON.parse(reply);
     res.json(reply);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await getPosters(`/peliculas/populares${page}`);
@@ -60,8 +60,8 @@ mainCtrl.peliculasPopulares = async (req, res) => {
 
 mainCtrl.getInfoPelicula = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  reply = JSON.parse(reply);
   if (reply) {
+    reply = JSON.parse(reply);
     res.json(reply);
     const data = await getInfo(`/pelicula/${req.params.pelicula}`);
     await redisSet(req.originalUrl, JSON.stringify(data));
@@ -73,8 +73,8 @@ mainCtrl.getInfoPelicula = async (req, res) => {
 
 mainCtrl.repPeliculas = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  reply = JSON.parse(reply);
   if (reply) {
+    reply = JSON.parse(reply);
     res.json(reply);
     const data = await reqRepro(`/pelicula/${req.params.pelicula}`);
     await redisSet(req.originalUrl, JSON.stringify(data));

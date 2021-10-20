@@ -20,8 +20,8 @@ const response = async (data, req, res) => {
 
 mainCtrl.renderSeries = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  reply = JSON.parse(reply);
   if (reply) {
+    reply = JSON.parse(reply);
     res.json(reply);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await getPosters(`/series${page}`);
@@ -35,8 +35,8 @@ mainCtrl.renderSeries = async (req, res) => {
 
 mainCtrl.seriesEstrenos = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  reply = JSON.parse(reply);
   if (reply) {
+    reply = JSON.parse(reply);
     res.json(reply);
     await redisSet(req.originalUrl, JSON.stringify(data));
     const page = req.query.page ? `?page=${req.query.page}` : "";
@@ -50,8 +50,8 @@ mainCtrl.seriesEstrenos = async (req, res) => {
 
 mainCtrl.seriesPopulares = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  reply = JSON.parse(reply);
   if (reply) {
+    reply = JSON.parse(reply);
     res.json(reply);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await getPosters(`/series/populares${page}`);
@@ -65,8 +65,8 @@ mainCtrl.seriesPopulares = async (req, res) => {
 
 mainCtrl.getInfoSerie = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  reply = JSON.parse(reply);
   if (reply) {
+    reply = JSON.parse(reply);
     res.json(reply);
     const data = await getInfo(`/serie/${req.params.serie}`);
     await redisSet(req.originalUrl, JSON.stringify(data));
@@ -78,8 +78,8 @@ mainCtrl.getInfoSerie = async (req, res) => {
 
 mainCtrl.reqSeasons = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  reply = JSON.parse(reply);
   if (reply) {
+    reply = JSON.parse(reply);
     res.json(reply);
     const data = await reqSeasons(`/serie/${req.params.serie}`);
     await redisSet(req.originalUrl, JSON.stringify(data));
@@ -91,8 +91,8 @@ mainCtrl.reqSeasons = async (req, res) => {
 
 mainCtrl.repSeries = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  reply = JSON.parse(reply);
   if (reply) {
+    reply = JSON.parse(reply);
     res.json(reply);
     const data = await reqRepro(
       `/serie/${req.params.serie}/temporada/${req.params.temp}/capitulo/${req.params.cap}`

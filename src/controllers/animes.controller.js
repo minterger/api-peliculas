@@ -20,8 +20,8 @@ const response = async (data, req, res) => {
 
 mainCtrl.renderAnimes = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  reply = JSON.parse(reply);
   if (reply) {
+    reply = JSON.parse(reply);
     res.json(reply);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await getPosters(`/animes${page}`);
@@ -35,8 +35,8 @@ mainCtrl.renderAnimes = async (req, res) => {
 
 mainCtrl.animesEstrenos = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  reply = JSON.parse(reply);
   if (reply) {
+    reply = JSON.parse(reply);
     res.json(reply);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await getPosters(`/animes/estrenos${page}`);
@@ -50,8 +50,8 @@ mainCtrl.animesEstrenos = async (req, res) => {
 
 mainCtrl.animesPopulares = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  reply = JSON.parse(reply);
   if (reply) {
+    reply = JSON.parse(reply);
     res.json(reply);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await getPosters(`/animes/populares${page}`);
@@ -65,8 +65,8 @@ mainCtrl.animesPopulares = async (req, res) => {
 
 mainCtrl.getInfoAnime = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  reply = JSON.parse(reply);
   if (reply) {
+    reply = JSON.parse(reply);
     res.json(reply);
     const data = await getInfo(`/anime/${req.params.anime}`);
     await redisSet(req.originalUrl, JSON.stringify(data));
@@ -78,8 +78,8 @@ mainCtrl.getInfoAnime = async (req, res) => {
 
 mainCtrl.reqSeasons = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  reply = JSON.parse(reply);
   if (reply) {
+    reply = JSON.parse(reply);
     res.json(reply);
     const data = await reqSeasons(`/anime/${req.params.anime}`);
     await redisSet(req.originalUrl, JSON.stringify(data));
@@ -91,8 +91,8 @@ mainCtrl.reqSeasons = async (req, res) => {
 
 mainCtrl.repAnime = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  reply = JSON.parse(reply);
   if (reply) {
+    reply = JSON.parse(reply);
     res.json(reply);
     const data = await reqRepro(
       `/anime/${req.params.anime}/temporada/${req.params.temp}/capitulo/${req.params.cap}`
