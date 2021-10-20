@@ -2,93 +2,86 @@ const { getPosters, getInfo, reqRepro } = require("../helpers/all.helper");
 const { redisGet, redisSet } = require("../redis");
 const mainCtrl = {};
 
-const getDate = () => {
-  const date = new Date();
-  const year = date.getUTCFullYear();
-  const month = date.getUTCMonth() + 1;
-  const day = date.getUTCDate();
-  return `${day}/${month}/${year}`;
-};
-
-const response = async (data, req, res, date) => {
+const response = async (data, req, res) => {
   if (data.status) {
-    res.status(data.status);
-    res.json({
+    res.status(data.status).json({
       text: data.statusText + ". Vea la documentacion en: " + req.get("host"),
     });
   } else {
-    res.status(200);
-    await redisSet(req.originalUrl, JSON.stringify({ data, date }));
+    await redisSet(req.originalUrl, JSON.stringify(data));
     res.json(data);
   }
 };
 
 mainCtrl.renderPeliculas = async (req, res) => {
-  const date = getDate();
   let reply = await redisGet(req.originalUrl);
   reply = JSON.parse(reply);
   if (reply) {
-    if (reply.date == date) {
-      return res.json(reply.data);
-    }
+    res.json(reply);
+    const page = req.query.page ? `?page=${req.query.page}` : "";
+    const data = await getPosters(`/peliculas${page}`);
+    await redisSet(req.originalUrl, JSON.stringify(data));
+    return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
   const data = await getPosters(`/peliculas${page}`);
-  response(data, req, res, date);
+  response(data, req, res);
 };
 
 mainCtrl.peliculasEstrenos = async (req, res) => {
-  const date = getDate();
   let reply = await redisGet(req.originalUrl);
   reply = JSON.parse(reply);
   if (reply) {
-    if (reply.date == date) {
-      return res.json(reply.data);
-    }
+    res.json(reply);
+    const page = req.query.page ? `?page=${req.query.page}` : "";
+    const data = await getPosters(`/peliculas/estrenos${page}`);
+    await redisSet(req.originalUrl, JSON.stringify(data));
+    return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
   const data = await getPosters(`/peliculas/estrenos${page}`);
-  response(data, req, res, date);
+  response(data, req, res);
 };
 
 mainCtrl.peliculasPopulares = async (req, res) => {
-  const date = getDate();
   let reply = await redisGet(req.originalUrl);
   reply = JSON.parse(reply);
   if (reply) {
-    if (reply.date == date) {
-      return res.json(reply.data);
-    }
+    res.json(reply);
+    const page = req.query.page ? `?page=${req.query.page}` : "";
+    const data = await getPosters(`/peliculas/populares${page}`);
+    await redisSet(req.originalUrl, JSON.stringify(data));
+    return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
   const data = await getPosters(`/peliculas/populares${page}`);
-  response(data, req, res, date);
+  response(data, req, res);
 };
 
 mainCtrl.getInfoPelicula = async (req, res) => {
-  const date = getDate();
   let reply = await redisGet(req.originalUrl);
   reply = JSON.parse(reply);
   if (reply) {
-    if (reply.date == date) {
-      return res.json(reply.data);
-    }
+    res.json(reply);
+    const data = await getInfo(`/pelicula/${req.params.pelicula}`);
+    await redisSet(req.originalUrl, JSON.stringify(data));
+    return;
   }
   const data = await getInfo(`/pelicula/${req.params.pelicula}`);
-  response(data, req, res, date);
+  response(data, req, res);
 };
 
 mainCtrl.repPeliculas = async (req, res) => {
-  const date = getDate();
   let reply = await redisGet(req.originalUrl);
   reply = JSON.parse(reply);
   if (reply) {
-    if (reply.date == date) {
-      return res.json(reply.data);
-    }
+    res.json(reply);
+    const data = await reqRepro(`/pelicula/${req.params.pelicula}`);
+    await redisSet(req.originalUrl, JSON.stringify(data));
+    return;
   }
   const data = await reqRepro(`/pelicula/${req.params.pelicula}`);
-  response(data, req, res, date);
+  response(data, req, res);
 };
 
 module.exports = mainCtrl;

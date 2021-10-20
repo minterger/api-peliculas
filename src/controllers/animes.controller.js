@@ -7,108 +7,103 @@ const {
 const { redisGet, redisSet } = require("../redis");
 const mainCtrl = {};
 
-const getDate = () => {
-  const date = new Date();
-  const year = date.getUTCFullYear();
-  const month = date.getUTCMonth() + 1;
-  const day = date.getUTCDate();
-  return `${day}/${month}/${year}`;
-};
-
-const response = async (data, req, res, date) => {
+const response = async (data, req, res) => {
   if (data.status) {
-    res.status(data.status);
-    res.json({
+    res.status(data.status).json({
       text: data.statusText + ". Vea la documentacion en: " + req.get("host"),
     });
   } else {
-    res.status(200);
-    await redisSet(req.originalUrl, JSON.stringify({ data, date }));
+    await redisSet(req.originalUrl, JSON.stringify(data));
     res.json(data);
   }
 };
 
 mainCtrl.renderAnimes = async (req, res) => {
-  const date = getDate();
   let reply = await redisGet(req.originalUrl);
   reply = JSON.parse(reply);
   if (reply) {
-    if (reply.date == date) {
-      return res.json(reply.data);
-    }
+    res.json(reply);
+    const page = req.query.page ? `?page=${req.query.page}` : "";
+    const data = await getPosters(`/animes${page}`);
+    await redisSet(req.originalUrl, JSON.stringify(data));
+    return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
   const data = await getPosters(`/animes${page}`);
-  response(data, req, res, date);
+  response(data, req, res);
 };
 
 mainCtrl.animesEstrenos = async (req, res) => {
-  const date = getDate();
   let reply = await redisGet(req.originalUrl);
   reply = JSON.parse(reply);
   if (reply) {
-    if (reply.date == date) {
-      return res.json(reply.data);
-    }
+    res.json(reply);
+    const page = req.query.page ? `?page=${req.query.page}` : "";
+    const data = await getPosters(`/animes/estrenos${page}`);
+    await redisSet(req.originalUrl, JSON.stringify(data));
+    return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
   const data = await getPosters(`/animes/estrenos${page}`);
-  response(data, req, res, date);
+  response(data, req, res);
 };
 
 mainCtrl.animesPopulares = async (req, res) => {
-  const date = getDate();
   let reply = await redisGet(req.originalUrl);
   reply = JSON.parse(reply);
   if (reply) {
-    if (reply.date == date) {
-      return res.json(reply.data);
-    }
+    res.json(reply);
+    const page = req.query.page ? `?page=${req.query.page}` : "";
+    const data = await getPosters(`/animes/populares${page}`);
+    await redisSet(req.originalUrl, JSON.stringify(data));
+    return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
   const data = await getPosters(`/animes/populares${page}`);
-  response(data, req, res, date);
+  response(data, req, res);
 };
 
 mainCtrl.getInfoAnime = async (req, res) => {
-  const date = getDate();
   let reply = await redisGet(req.originalUrl);
   reply = JSON.parse(reply);
   if (reply) {
-    if (reply.date == date) {
-      return res.json(reply.data);
-    }
+    res.json(reply);
+    const data = await getInfo(`/anime/${req.params.anime}`);
+    await redisSet(req.originalUrl, JSON.stringify(data));
+    return;
   }
   const data = await getInfo(`/anime/${req.params.anime}`);
-  response(data, req, res, date);
+  response(data, req, res);
 };
 
 mainCtrl.reqSeasons = async (req, res) => {
-  const date = getDate();
   let reply = await redisGet(req.originalUrl);
   reply = JSON.parse(reply);
   if (reply) {
-    if (reply.date == date) {
-      return res.json(reply.data);
-    }
+    res.json(reply);
+    const data = await reqSeasons(`/anime/${req.params.anime}`);
+    await redisSet(req.originalUrl, JSON.stringify(data));
+    return;
   }
   const data = await reqSeasons(`/anime/${req.params.anime}`);
-  response(data, req, res, date);
+  response(data, req, res);
 };
 
 mainCtrl.repAnime = async (req, res) => {
-  const date = getDate();
   let reply = await redisGet(req.originalUrl);
   reply = JSON.parse(reply);
   if (reply) {
-    if (reply.date == date) {
-      return res.json(reply.data);
-    }
+    res.json(reply);
+    const data = await reqRepro(
+      `/anime/${req.params.anime}/temporada/${req.params.temp}/capitulo/${req.params.cap}`
+    );
+    await redisSet(req.originalUrl, JSON.stringify(data));
+    return;
   }
   const data = await reqRepro(
     `/anime/${req.params.anime}/temporada/${req.params.temp}/capitulo/${req.params.cap}`
   );
-  response(data, req, res, date);
+  response(data, req, res);
 };
 
 module.exports = mainCtrl;
