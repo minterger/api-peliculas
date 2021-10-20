@@ -3,7 +3,7 @@ const axios = require('axios');
 async function fetchurl(param) {
   let uri = param == null ? "" : param;
   try {
-    const res = await axios.get(`https://pelisplushd.net/asd${uri}`);
+    const res = await axios.get(`https://pelisplushd.net/${uri}`);
     return res;
   } catch (error) {
     if (error.response) return error.response;
