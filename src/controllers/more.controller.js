@@ -8,26 +8,47 @@ const {
 const { redisGet, redisSet } = require("../redis");
 const mainCtrl = {};
 
+// funcion para generar fecha actual
+const getDate = () => {
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const hour = date.getHours();
+  const minutes = date.getMinutes();
+  const seconds = date.getSeconds();
+  return `${year}-${month}-${day} ${hour}:${minutes}:${seconds}`;
+};
+
+// comparar si la fecha es mayor por 3 dias
+const compareDate = (date) => {
+  const dateNow = new Date();
+  const dateCompare = new Date(date);
+  const diff = dateNow - dateCompare;
+  const diffDays = Math.ceil(diff / (1000 * 60 * 60 * 24));
+  return diffDays > 3;
+};
+
 const response = async (data, req, res) => {
   if (data.status) {
     res.status(data.status).json({
       text: data.statusText + ". Vea la documentacion en: " + req.get("host"),
     });
   } else {
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    await redisSet(req.originalUrl, JSON.stringify({ data, date: getDate() }));
     res.json(data);
   }
 };
 
 mainCtrl.search = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  if (reply) {
+  if (reply && !compareDate(reply.date)) {
     reply = JSON.parse(reply);
-    res.json(reply);
+    res.json(reply.data);
     const page = req.query.page ? `&page=${req.query.page}` : "";
     const data = await searchPoster(`/search?s=${req.query.s}${page}`);
     if (data.status) return;
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    await redisSet(req.originalUrl, JSON.stringify({ data, date: getDate() }));
     return;
   }
   const page = req.query.page ? `&page=${req.query.page}` : "";
@@ -37,12 +58,12 @@ mainCtrl.search = async (req, res) => {
 
 mainCtrl.getEstrenos = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  if (reply) {
+  if (reply && !compareDate(reply.date)) {
     reply = JSON.parse(reply);
-    res.json(reply);
+    res.json(reply.data);
     const data = await searchPoster(`/year/${process.env.YEAR_ESTRENO}`);
     if (data.status) return;
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    await redisSet(req.originalUrl, JSON.stringify({ data, date: getDate() }));
     return;
   }
   // const data = await reqEstrenos('');
@@ -52,12 +73,12 @@ mainCtrl.getEstrenos = async (req, res) => {
 
 mainCtrl.generos = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  if (reply) {
+  if (reply && !compareDate(reply.date)) {
     reply = JSON.parse(reply);
-    res.json(reply);
+    res.json(reply.data);
     const data = await reqGenders("");
     if (data.status) return;
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    await redisSet(req.originalUrl, JSON.stringify({ data, date: getDate() }));
     return;
   }
   const data = await reqGenders("");
@@ -66,13 +87,13 @@ mainCtrl.generos = async (req, res) => {
 
 mainCtrl.getGeneros = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  if (reply) {
+  if (reply && !compareDate(reply.date)) {
     reply = JSON.parse(reply);
-    res.json(reply);
+    res.json(reply.data);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await searchPoster(`/generos/${req.params.genero}${page}`);
     if (data.status) return;
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    await redisSet(req.originalUrl, JSON.stringify({ data, date: getDate() }));
     return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
@@ -82,15 +103,15 @@ mainCtrl.getGeneros = async (req, res) => {
 
 mainCtrl.getGenerosPeliculas = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  if (reply) {
+  if (reply && !compareDate(reply.date)) {
     reply = JSON.parse(reply);
-    res.json(reply);
+    res.json(reply.data);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await searchPoster(
       `/generos/${req.params.genero}/peliculas${page}`
     );
-      if (data.status) return;
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    if (data.status) return;
+    await redisSet(req.originalUrl, JSON.stringify({ data, date: getDate() }));
     return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
@@ -102,15 +123,15 @@ mainCtrl.getGenerosPeliculas = async (req, res) => {
 
 mainCtrl.getGenerosSeries = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  if (reply) {
+  if (reply && !compareDate(reply.date)) {
     reply = JSON.parse(reply);
-    res.json(reply);
+    res.json(reply.data);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await searchPoster(
       `/generos/${req.params.genero}/series${page}`
     );
-      if (data.status) return;
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    if (data.status) return;
+    await redisSet(req.originalUrl, JSON.stringify({ data, date: getDate() }));
     return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
@@ -122,15 +143,15 @@ mainCtrl.getGenerosSeries = async (req, res) => {
 
 mainCtrl.getGenerosAnimes = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  if (reply) {
+  if (reply && !compareDate(reply.date)) {
     reply = JSON.parse(reply);
-    res.json(reply);
+    res.json(reply.data);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await searchPoster(
       `/generos/${req.params.genero}/animes${page}`
     );
-      if (data.status) return;
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    if (data.status) return;
+    await redisSet(req.originalUrl, JSON.stringify({ data, date: getDate() }));
     return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
@@ -142,12 +163,12 @@ mainCtrl.getGenerosAnimes = async (req, res) => {
 
 mainCtrl.years = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  if (reply) {
+  if (reply && !compareDate(reply.date)) {
     reply = JSON.parse(reply);
-    res.json(reply);
+    res.json(reply.data);
     const data = await reqYears("");
     if (data.status) return;
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    await redisSet(req.originalUrl, JSON.stringify({ data, date: getDate() }));
     return;
   }
   const data = await reqYears("");
@@ -156,13 +177,13 @@ mainCtrl.years = async (req, res) => {
 
 mainCtrl.getYear = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  if (reply) {
+  if (reply && !compareDate(reply.date)) {
     reply = JSON.parse(reply);
-    res.json(reply);
+    res.json(reply.data);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await searchPoster(`/year/${req.params.year}${page}`);
     if (data.status) return;
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    await redisSet(req.originalUrl, JSON.stringify({ data, date: getDate() }));
     return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
@@ -172,15 +193,15 @@ mainCtrl.getYear = async (req, res) => {
 
 mainCtrl.getYearPeliculas = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  if (reply) {
+  if (reply && !compareDate(reply.date)) {
     reply = JSON.parse(reply);
-    res.json(reply);
+    res.json(reply.data);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await searchPoster(
       `/year/${req.params.year}/peliculas${page}`
     );
-      if (data.status) return;
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    if (data.status) return;
+    await redisSet(req.originalUrl, JSON.stringify({ data, date: getDate() }));
     return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
@@ -190,13 +211,13 @@ mainCtrl.getYearPeliculas = async (req, res) => {
 
 mainCtrl.getYearSeries = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  if (reply) {
+  if (reply && !compareDate(reply.date)) {
     reply = JSON.parse(reply);
-    res.json(reply);
+    res.json(reply.data);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await searchPoster(`/year/${req.params.year}/series${page}`);
     if (data.status) return;
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    await redisSet(req.originalUrl, JSON.stringify({ data, date: getDate() }));
     return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
@@ -206,13 +227,13 @@ mainCtrl.getYearSeries = async (req, res) => {
 
 mainCtrl.getYearAnimes = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  if (reply) {
+  if (reply && !compareDate(reply.date)) {
     reply = JSON.parse(reply);
-    res.json(reply);
+    res.json(reply.data);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await searchPoster(`/year/${req.params.year}/animes${page}`);
     if (data.status) return;
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    await redisSet(req.originalUrl, JSON.stringify({ data, date: getDate() }));
     return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
@@ -222,13 +243,13 @@ mainCtrl.getYearAnimes = async (req, res) => {
 
 mainCtrl.getPais = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  if (reply) {
+  if (reply && !compareDate(reply.date)) {
     reply = JSON.parse(reply);
-    res.json(reply);
+    res.json(reply.data);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await searchPoster(`/pais/${req.params.pais}${page}`);
     if (data.status) return;
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    await redisSet(req.originalUrl, JSON.stringify({ data, date: getDate() }));
     return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
@@ -238,13 +259,13 @@ mainCtrl.getPais = async (req, res) => {
 
 mainCtrl.getActor = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  if (reply) {
+  if (reply && !compareDate(reply.date)) {
     reply = JSON.parse(reply);
-    res.json(reply);
+    res.json(reply.data);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await searchPoster(`/actor/${req.params.actor}${page}`);
     if (data.status) return;
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    await redisSet(req.originalUrl, JSON.stringify({ data, date: getDate() }));
     return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
@@ -254,13 +275,13 @@ mainCtrl.getActor = async (req, res) => {
 
 mainCtrl.getDirector = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  if (reply) {
+  if (reply && !compareDate(reply.date)) {
     reply = JSON.parse(reply);
-    res.json(reply);
+    res.json(reply.data);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await searchPoster(`/director/${req.params.director}${page}`);
     if (data.status) return;
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    await redisSet(req.originalUrl, JSON.stringify({ data, date: getDate() }));
     return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
@@ -270,13 +291,13 @@ mainCtrl.getDirector = async (req, res) => {
 
 mainCtrl.getEscritor = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  if (reply) {
+  if (reply && !compareDate(reply.date)) {
     reply = JSON.parse(reply);
-    res.json(reply);
+    res.json(reply.data);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await searchPoster(`/escritor/${req.params.escritor}${page}`);
     if (data.status) return;
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    await redisSet(req.originalUrl, JSON.stringify({ data, date: getDate() }));
     return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
@@ -286,12 +307,12 @@ mainCtrl.getEscritor = async (req, res) => {
 
 mainCtrl.getLastUploaded = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  if (reply) {
+  if (reply && !compareDate(reply.date)) {
     reply = JSON.parse(reply);
-    res.json(reply);
+    res.json(reply.data);
     const data = await reqLastUploaded();
     if (data.status) return;
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    await redisSet(req.originalUrl, JSON.stringify({ data, date: getDate() }));
     return;
   }
   const data = await reqLastUploaded();

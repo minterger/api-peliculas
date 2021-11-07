@@ -7,26 +7,47 @@ const {
 const { redisGet, redisSet } = require("../redis");
 const mainCtrl = {};
 
+// funcion para generar fecha actual
+const getDate = () => {
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const hour = date.getHours();
+  const minutes = date.getMinutes();
+  const seconds = date.getSeconds();
+  return `${year}-${month}-${day} ${hour}:${minutes}:${seconds}`;
+};
+
+// comparar si la fecha es mayor por 3 dias
+const compareDate = (date) => {
+  const dateNow = new Date();
+  const dateCompare = new Date(date);
+  const diff = dateNow - dateCompare;
+  const diffDays = Math.ceil(diff / (1000 * 60 * 60 * 24));
+  return diffDays > 3;
+};
+
 const response = async (data, req, res) => {
   if (data.status) {
     res.status(data.status).json({
       text: data.statusText + ". Vea la documentacion en: " + req.get("host"),
     });
   } else {
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    await redisSet(req.originalUrl, JSON.stringify({ data, date: getDate() }));
     res.json(data);
   }
 };
 
 mainCtrl.renderSeries = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  if (reply) {
+  if (reply && !compareDate(reply.date)) {
     reply = JSON.parse(reply);
-    res.json(reply);
+    res.json(reply.data);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await getPosters(`/series${page}`);
     if (data.status) return;
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    await redisSet(req.originalUrl, JSON.stringify({ data, date: getDate() }));
     return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
@@ -36,13 +57,13 @@ mainCtrl.renderSeries = async (req, res) => {
 
 mainCtrl.seriesEstrenos = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  if (reply) {
+  if (reply && !compareDate(reply.date)) {
     reply = JSON.parse(reply);
-    res.json(reply);
+    res.json(reply.data);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await getPosters(`/series/estrenos${page}`);
     if (data.status) return;
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    await redisSet(req.originalUrl, JSON.stringify({ data, date: getDate() }));
     return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
@@ -52,13 +73,13 @@ mainCtrl.seriesEstrenos = async (req, res) => {
 
 mainCtrl.seriesPopulares = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  if (reply) {
+  if (reply && !compareDate(reply.date)) {
     reply = JSON.parse(reply);
-    res.json(reply);
+    res.json(reply.data);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await getPosters(`/series/populares${page}`);
     if (data.status) return;
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    await redisSet(req.originalUrl, JSON.stringify({ data, date: getDate() }));
     return;
   }
   const page = req.query.page ? `?page=${req.query.page}` : "";
@@ -68,12 +89,12 @@ mainCtrl.seriesPopulares = async (req, res) => {
 
 mainCtrl.getInfoSerie = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  if (reply) {
+  if (reply && !compareDate(reply.date)) {
     reply = JSON.parse(reply);
-    res.json(reply);
+    res.json(reply.data);
     const data = await getInfo(`/serie/${req.params.serie}`);
     if (data.status) return;
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    await redisSet(req.originalUrl, JSON.stringify({ data, date: getDate() }));
     return;
   }
   const data = await getInfo(`/serie/${req.params.serie}`);
@@ -82,12 +103,12 @@ mainCtrl.getInfoSerie = async (req, res) => {
 
 mainCtrl.reqSeasons = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  if (reply) {
+  if (reply && !compareDate(reply.date)) {
     reply = JSON.parse(reply);
-    res.json(reply);
+    res.json(reply.data);
     const data = await reqSeasons(`/serie/${req.params.serie}`);
     if (data.status) return;
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    await redisSet(req.originalUrl, JSON.stringify({ data, date: getDate() }));
     return;
   }
   const data = await reqSeasons(`/serie/${req.params.serie}`);
@@ -96,14 +117,14 @@ mainCtrl.reqSeasons = async (req, res) => {
 
 mainCtrl.repSeries = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
-  if (reply) {
+  if (reply && !compareDate(reply.date)) {
     reply = JSON.parse(reply);
-    res.json(reply);
+    res.json(reply.data);
     const data = await reqRepro(
       `/serie/${req.params.serie}/temporada/${req.params.temp}/capitulo/${req.params.cap}`
     );
     if (data.status) return;
-    await redisSet(req.originalUrl, JSON.stringify(data));
+    await redisSet(req.originalUrl, JSON.stringify({ data, date: getDate() }));
     return;
   }
   const data = await reqRepro(
