@@ -36,7 +36,7 @@ const response = async (data, req, res) => {
 mainCtrl.search = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
   //reemplazar ñ
-  let search = req.query.s.replace(/ñ/g, "%C3%B1");
+  let search = req.query.s ? req.query.s.replace(/ñ/g, "%C3%B1") : '';
   reply = JSON.parse(reply);
   if (reply && !compareDate(reply.date)) {
     res.json(reply.data);
