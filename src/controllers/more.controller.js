@@ -42,17 +42,19 @@ const response = async (data, req, res) => {
 
 mainCtrl.search = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
+  //reemplazar ñ
+  let search = req.query.s.replace(/ñ/g, "%C3%B1");
   if (reply && !compareDate(reply.date)) {
     reply = JSON.parse(reply);
     res.json(reply.data);
     const page = req.query.page ? `&page=${req.query.page}` : "";
-    const data = await searchPoster(`/search?s=${req.query.s}${page}`);
+    const data = await searchPoster(`/search?s=${search}${page}`);
     if (data.status) return;
     await redisSet(req.originalUrl, JSON.stringify({ data, date: getDate() }));
     return;
   }
   const page = req.query.page ? `&page=${req.query.page}` : "";
-  const data = await searchPoster(`/search?s=${req.query.s}${page}`);
+  const data = await searchPoster(`/search?s=${search}${page}`);
   response(data, req, res);
 };
 
