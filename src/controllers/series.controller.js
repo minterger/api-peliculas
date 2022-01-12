@@ -17,7 +17,7 @@ const getDate = () => {
 const compareDate = (date) => {
   const dateNow = new Date();
   const diff = dateNow - date;
-  const diffDays = Math.ceil(diff / (1000 * 60 * 60 * 24));
+  const diffDays = Math.abs(Math.ceil(diff / (1000 * 60 * 60 * 24)));
   return diffDays > 3;
 };
 
