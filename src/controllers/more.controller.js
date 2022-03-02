@@ -6,37 +6,15 @@ const {
   reqLastUploaded,
 } = require("../helpers/more.helper");
 const { redisGet, redisSet } = require("../redis");
+const { compareDate, getDate } = require("../helpers/dates");
+const response = require("../helpers/response");
+
 const mainCtrl = {};
-
-// funcion para generar fecha actual
-const getDate = () => {
-  const date = new Date();
-  return date;
-};
-
-// comparar si la fecha es mayor por 3 dias
-const compareDate = (date) => {
-  const dateNow = new Date();
-  const diff = dateNow - date;
-  const diffDays = Math.abs(Math.ceil(diff / (1000 * 60 * 60 * 24)));
-  return diffDays > 3;
-};
-
-const response = async (data, req, res) => {
-  if (data.status) {
-    res.status(data.status).json({
-      text: data.statusText + ". Vea la documentacion en: " + req.get("host"),
-    });
-  } else {
-    await redisSet(req.originalUrl, JSON.stringify({ data, date: getDate() }));
-    res.json(data);
-  }
-};
 
 mainCtrl.search = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
   //reemplazar ñ
-  let search = req.query.s ? req.query.s.replace(/ñ/g, "%C3%B1") : '';
+  let search = req.query.s ? req.query.s.replace(/ñ/g, "%C3%B1") : "";
   reply = JSON.parse(reply);
   if (reply && !compareDate(reply.date)) {
     res.json(reply.data);
