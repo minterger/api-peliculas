@@ -8,7 +8,7 @@ const mainCtrl = {};
 mainCtrl.renderPeliculas = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
   reply = JSON.parse(reply);
-  if (reply && !compareDate(reply.date)) {
+  if (reply && compareDate(reply.date)) {
     res.json(reply.data);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await getPosters(`/peliculas${page}`);
@@ -24,7 +24,7 @@ mainCtrl.renderPeliculas = async (req, res) => {
 mainCtrl.peliculasEstrenos = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
   reply = JSON.parse(reply);
-  if (reply && !compareDate(reply.date)) {
+  if (reply && compareDate(reply.date)) {
     res.json(reply.data);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await getPosters(`/peliculas/estrenos${page}`);
@@ -40,7 +40,7 @@ mainCtrl.peliculasEstrenos = async (req, res) => {
 mainCtrl.peliculasPopulares = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
   reply = JSON.parse(reply);
-  if (reply && !compareDate(reply.date)) {
+  if (reply && compareDate(reply.date)) {
     res.json(reply.data);
     const page = req.query.page ? `?page=${req.query.page}` : "";
     const data = await getPosters(`/peliculas/populares${page}`);
@@ -56,7 +56,7 @@ mainCtrl.peliculasPopulares = async (req, res) => {
 mainCtrl.getInfoPelicula = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
   reply = JSON.parse(reply);
-  if (reply && !compareDate(reply.date)) {
+  if (reply && compareDate(reply.date)) {
     res.json(reply.data);
     const data = await getInfo(`/pelicula/${req.params.pelicula}`);
     if (data.status) return;
@@ -70,7 +70,7 @@ mainCtrl.getInfoPelicula = async (req, res) => {
 mainCtrl.repPeliculas = async (req, res) => {
   let reply = await redisGet(req.originalUrl);
   reply = JSON.parse(reply);
-  if (reply && !compareDate(reply.date)) {
+  if (reply && compareDate(reply.date)) {
     res.json(reply.data);
     const data = await reqRepro(`/pelicula/${req.params.pelicula}`);
     if (data.status) return;

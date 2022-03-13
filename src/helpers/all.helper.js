@@ -5,10 +5,7 @@ async function getPosters(uri) {
   try {
     const html = await fetchurl(uri);
     if (html.status !== 200) {
-      return {
-        status: html.status,
-        statusText: html.statusText,
-      };
+      throw new Error(html);
     }
     const $ = cheerio.load(html.data);
 
@@ -56,10 +53,7 @@ async function getInfo(uri) {
   try {
     const html = await fetchurl(uri);
     if (html.status !== 200) {
-      return {
-        status: html.status,
-        statusText: html.statusText,
-      };
+      throw new Error(html);
     }
     const $ = cheerio.load(html.data);
 
