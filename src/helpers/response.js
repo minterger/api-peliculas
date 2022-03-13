@@ -1,3 +1,6 @@
+const { redisSet } = require("../redis");
+const { getDate } = require("./dates");
+
 const response = async (data, req, res) => {
   if (data.status) {
     res.status(data.status).json({
