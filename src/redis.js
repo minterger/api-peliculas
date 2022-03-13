@@ -7,17 +7,16 @@ let client;
     url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
     password: process.env.REDIS_PASSWORD,
   });
-  
+
   client.on("connect", () => {
     console.log("Redis connected");
   });
-  
+
   client.on("error", (err) => {
     console.log(err);
   });
 
   await client.connect();
-  
 })();
 
 const redisGet = async (key) => {
@@ -25,7 +24,8 @@ const redisGet = async (key) => {
 };
 
 const redisSet = async (key, value) => {
-  return await client.set(key, value);
+  //client.set con ttl de 1 dia
+  return await client.set(key, value, "EX", 86400);
 };
 
 module.exports = { redisGet, redisSet };
