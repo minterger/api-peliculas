@@ -1,99 +1,39 @@
 const { getPosters, getInfo, reqRepro } = require("../helpers/all.helper");
-const { redisGet, redisSet } = require("../redis");
+const { getForRedis, saveOnRedis } = require("../helpers/redis");
 
 const mainCtrl = {};
 
 mainCtrl.renderPeliculas = async (req, res) => {
-  let reply = await redisGet(req.originalUrl);
-  reply = JSON.parse(reply);
-  if (reply) {
-    res.json(reply);
-  }
+  const reply = await getForRedis(req, res);
   const page = req.query.page ? `?page=${req.query.page}` : "";
   const data = await getPosters(`/peliculas${page}`);
-  if (!reply) {
-    res.json(data);
-  } else if (data.status) {
-    res.status(data.status).json({
-      text: data.statusText + ". Vea la documentacion en: " + req.get("host"),
-    });
-    return;
-  }
-  await redisSet(req.originalUrl, JSON.stringify(data));
+  await saveOnRedis(req, res, reply, data);
 };
 
 mainCtrl.peliculasEstrenos = async (req, res) => {
-  let reply = await redisGet(req.originalUrl);
-  reply = JSON.parse(reply);
-  if (reply) {
-    res.json(reply);
-  }
+  const reply = await getForRedis(req, res);
   const page = req.query.page ? `?page=${req.query.page}` : "";
   const data = await getPosters(`/peliculas/estrenos${page}`);
-  if (!reply) {
-    res.json(data);
-  } else if (data.status) {
-    res.status(data.status).json({
-      text: data.statusText + ". Vea la documentacion en: " + req.get("host"),
-    });
-    return;
-  }
-  await redisSet(req.originalUrl, JSON.stringify(data));
+  await saveOnRedis(req, res, reply, data);
 };
 
 mainCtrl.peliculasPopulares = async (req, res) => {
-  let reply = await redisGet(req.originalUrl);
-  reply = JSON.parse(reply);
-  if (reply) {
-    res.json(reply);
-  }
+  const reply = await getForRedis(req, res);
   const page = req.query.page ? `?page=${req.query.page}` : "";
   const data = await getPosters(`/peliculas/populares${page}`);
-  if (!reply) {
-    res.json(data);
-  } else if (data.status) {
-    res.status(data.status).json({
-      text: data.statusText + ". Vea la documentacion en: " + req.get("host"),
-    });
-    return;
-  }
-  await redisSet(req.originalUrl, JSON.stringify(data));
+  await saveOnRedis(req, res, reply, data);
 };
 
 mainCtrl.getInfoPelicula = async (req, res) => {
-  let reply = await redisGet(req.originalUrl);
-  reply = JSON.parse(reply);
-  if (reply) {
-    res.json(reply);
-  }
+  const reply = await getForRedis(req, res);
   const data = await getInfo(`/pelicula/${req.params.pelicula}`);
-  if (!reply) {
-    res.json(data);
-  } else if (data.status) {
-    res.status(data.status).json({
-      text: data.statusText + ". Vea la documentacion en: " + req.get("host"),
-    });
-    return;
-  }
-  await redisSet(req.originalUrl, JSON.stringify(data));
+  await saveOnRedis(req, res, reply, data);
 };
 
 mainCtrl.repPeliculas = async (req, res) => {
-  let reply = await redisGet(req.originalUrl);
-  reply = JSON.parse(reply);
-  if (reply) {
-    res.json(reply);
-  }
+  const reply = await getForRedis(req, res);
   const data = await reqRepro(`/pelicula/${req.params.pelicula}`);
-  if (!reply) {
-    res.json(data);
-  } else if (data.status) {
-    res.status(data.status).json({
-      text: data.statusText + ". Vea la documentacion en: " + req.get("host"),
-    });
-    return;
-  }
-  await redisSet(req.originalUrl, JSON.stringify(data));
+  await saveOnRedis(req, res, reply, data);
 };
 
 module.exports = mainCtrl;
