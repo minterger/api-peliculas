@@ -23,9 +23,13 @@ const redisGet = async (key) => {
   return await client.get(key);
 };
 
-const redisSet = async (key, value) => {
-  //client.set con ttl de 1 dia
-  return await client.set(key, value, "EX", 86400);
+const ttl = async (key) => {
+  return await client.ttl(key);
 };
 
-module.exports = { redisGet, redisSet };
+const redisSet = async (key, value) => {
+  //client.set con ttl de 1 dia
+  return await client.set(key, value, { EX: 86400 });
+};
+
+module.exports = { redisGet, redisSet, ttl };
