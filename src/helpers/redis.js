@@ -7,12 +7,16 @@ const { redisGet, redisSet } = require("../redis");
  * @returns reply from redis or data from api
  */
 const getForRedis = async (req, res) => {
-  let reply = await redisGet(req.originalUrl);
-  reply = JSON.parse(reply);
-  if (reply) {
-    res.json(reply);
+  try {
+    let reply = await redisGet(req.originalUrl);
+    reply = JSON.parse(reply);
+    if (reply) {
+      res.json(reply);
+    }
+    return reply;
+  } catch (error) {
+    return null;
   }
-  return reply || null;
 };
 
 /**
@@ -24,15 +28,18 @@ const getForRedis = async (req, res) => {
  * @returns
  */
 const saveOnRedis = async (req, res, reply, data) => {
-  if (!reply) {
-    res.json(data);
-  } else if (data.status) {
+  try {
+    if (!reply) {
+      res.json(data);
+    } else if (data.status) {
+      throw new Error();
+    }
+    await redisSet(req.originalUrl, JSON.stringify(data));
+  } catch (error) {
     res.status(data.status).json({
       text: data.statusText + ". Vea la documentacion en: " + req.get("host"),
     });
-    return;
   }
-  await redisSet(req.originalUrl, JSON.stringify(data));
 };
 
 module.exports = { getForRedis, saveOnRedis };
