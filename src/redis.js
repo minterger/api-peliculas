@@ -28,8 +28,8 @@ const ttl = async (key) => {
 };
 
 const redisSet = async (key, value) => {
-  //client.set con ttl de 1 dia
-  return await client.set(key, value, { EX: 86400 });
+  //client.set con ttl de 2 dias
+  return await client.set(key, value, { EX: 172800 });
 };
 
 module.exports = { redisGet, redisSet, ttl };
