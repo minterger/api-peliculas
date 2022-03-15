@@ -29,11 +29,10 @@ const getForRedis = async (req, res) => {
  */
 const saveOnRedis = async (req, res, reply, data) => {
   try {
-    if (!reply) {
-      res.json(data);
-    } else if (data.status) {
-      throw new Error();
-    }
+    if (data.status) throw new Error();
+    
+    if (!reply) res.json(data);
+
     await redisSet(req.originalUrl, JSON.stringify(data));
   } catch (error) {
     res.status(data.status).json({
